@@ -14,7 +14,6 @@ $thumbnail  = get_event_thumbnail( $post, 'full' );
 <div class="wpem-event-box-col wpem-col wpem-col-12 wpem-col-md-6 wpem-col-lg-<?php echo esc_attr(apply_filters('event_manager_event_wpem_column', '4')); ?>">
     <!----- wpem-col-lg-4 value can be change by admin settings ------->
     <div class="wpem-event-layout-wrapper">
-        <p style="color: red; font-size: 20px;">Кастомный шаблон загружен!</p>
         <div <?php event_listing_class(''); ?>>
             <a href="<?php display_event_permalink(); ?>" class="wpem-event-action-url event-style-color <?php echo esc_attr_e($event_type); ?>">
                 <div class="wpem-event-banner">
