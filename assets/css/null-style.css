@@ -57,11 +57,18 @@ body {
     flex-direction: column;
     justify-content: space-between;
     min-height: 100%;
-    overflow: hidden;
 }
 
-.container {
+.container-small {
     box-sizing: content-box;
     max-width: 1180px;
     margin: 0px auto;
+    padding: 0px 15px;
+}
+
+.container-large {
+    box-sizing: content-box;
+    max-width: 1580px;
+    margin: 0px auto;
+    padding: 0px 15px;
 }
