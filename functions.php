@@ -41,5 +41,21 @@ function wpem_all_event_organizer_args($args) {
     return $args;
 }
 
+
+function custom_fullcalendar_post_types( $args ) {
+    $args['post_types'][] = 'event_listing';
+    return $args;
+}
+add_filter( 'em_fullcalendar_get_options', 'custom_fullcalendar_post_types' );
+
+
+function custom_fullcalendar_event($event) {
+    $event['color'] = '#ff0000'; // Красный цвет для событий
+    $event['title'] = strtoupper($event['title']); // Заглавные буквы
+    return $event;
+}
+add_filter('wp_fullcalendar_event', 'custom_fullcalendar_event');
+
+
 add_theme_support('custom-logo');
 add_theme_support('wp-event-manager');

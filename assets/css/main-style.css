@@ -13,6 +13,10 @@ body {
     padding: 15px 0px;
 }
 
+.main {
+    /* background-color: #fff; */
+}
+
 .menu {
     display: flex;
     column-gap: 50px;
