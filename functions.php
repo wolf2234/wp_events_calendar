@@ -23,7 +23,7 @@ function event_calendar_scripts() {
 }
 
 add_filter('event_manager_locate_template', function ($template, $template_name, $template_path) {
-    $theme_template = get_stylesheet_directory() . '/wp-event-manager/' . $template_name;
+    $theme_template = get_stylesheet_directory() . '/events-manager/' . $template_name;
 
     if (file_exists($theme_template)) {
         error_log('Шаблон загружен из темы: ' . $theme_template);
@@ -58,4 +58,5 @@ add_filter('wp_fullcalendar_event', 'custom_fullcalendar_event');
 
 
 add_theme_support('custom-logo');
-add_theme_support('wp-event-manager');
+// add_theme_support('wp-event-manager');
+add_theme_support('events-manager');
