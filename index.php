@@ -24,14 +24,14 @@
                 </div>
             </div>
         </header>
-        <div class="container-small">
+        <div class="">
             <main class="main">
-                <div class="calendar" style="background-color:#fff;">
+                <div class="calendar">
                     <?php echo do_shortcode('[events_calendar]'); ?>
                 </div>
-                <div class="event-form" style="background-color:#fff;">
-                    <?php echo do_shortcode('[event_form]'); ?>
-                </div>
+                <!-- <div class="event-form" style="background-color:#fff;">
+                    <?php //echo do_shortcode('[event_form]'); ?>
+                </div> -->
             </main>
         </div>
         <footer class="footer">

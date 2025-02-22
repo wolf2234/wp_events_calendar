@@ -14,16 +14,15 @@ $id = absint($args['id']);
 $events = array(); // used in two templates
 ?>
 <div class="<?php em_template_classes('calendar'); ?> <?php echo esc_attr(implode(' ', $calendar['css']['calendar_classes'])); ?>" data-scope="<?php echo esc_attr($args['scope']['name']); ?>" data-preview-tooltips-trigger="" id="em-calendar-<?php echo $id ?>" data-view-id="<?php echo $id ?>" data-view-type="calendar">
-	<p class="" style="color:yellow;font-size:30px;">FGGGGGGGGGGG</p>
 	<?php
 	// display section for showing header navigation (datepicker, arrows, search toggle etc.) of the calendar
 	$template = em_locate_template('calendar/section-header-navigation.php', false);
 	include($template);
-	
+
 	// display section for showing weekdays at top of calendar
 	$template = em_locate_template('calendar/section-header-weekdays.php', false);
 	include($template);
-	
+
 	// display main section
 	$template = em_locate_template('calendar/section-dates.php', false);
 	include($template);

@@ -20,7 +20,7 @@ $required = apply_filters('em_required_html','<i>*</i>');
 
 $id = rand(); // not related to searches, so we'll just add an ID for good practice
 ?>
-<div class="<?php em_template_classes('view-container'); ?> exevent" id="em-view-<?php echo $id; ?>" data-view="event">
+<div class="<?php em_template_classes('view-container'); ?>" id="em-view-<?php echo $id; ?>" data-view="event">
 	<?php
 		echo $EM_Notices;
 		//Success notice
