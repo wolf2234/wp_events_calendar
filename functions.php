@@ -21,6 +21,9 @@ function event_calendar_scripts() {
     wp_register_script( 'jquery', "https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js");
     wp_enqueue_script( 'jquery' );
     wp_enqueue_script( 'scripts', get_template_directory_uri() . '/assets/js/scripts.js', array('jquery'), null, true);
+    wp_localize_script('scripts', 'ajax_object', array(
+        'ajaxurl' => admin_url('admin-ajax.php'),
+    ));
 }
 
 add_filter('event_manager_locate_template', function ($template, $template_name, $template_path) {
@@ -56,6 +59,49 @@ function custom_fullcalendar_event($event) {
     return $event;
 }
 add_filter('wp_fullcalendar_event', 'custom_fullcalendar_event');
+
+
+
+
+add_action('wp_ajax_calendar', 'get_calendar_data');
+add_action('wp_ajax_nopriv_calendar', 'get_calendar_data');
+function get_calendar_data() {
+    if (!isset($_POST['eventDate'])) {
+        wp_send_json_error(['message' => 'Дата не передана']);
+    }
+
+    global $wpdb;
+    $date = sanitize_text_field($_POST['eventDate']);
+    $table_name = $wpdb->prefix . 'em_events'; 
+
+    $query = $wpdb->prepare("
+        SELECT event_id, event_name, event_status, event_start_date, event_end_date, event_start_time, event_end_time
+        FROM $table_name 
+        WHERE %s BETWEEN event_start_date AND event_end_date
+    ", $date);
+
+    $events = $wpdb->get_results($query);
+
+    if (!empty($events)) {
+        $data = [];
+        foreach ($events as $event) {
+            $data[] = [
+                'id' => $event->event_id,
+                'name' => $event->event_name,
+                'status' => $event->event_status,
+                'start_time' => $event->event_start_time,
+                'end_time' => $event->event_end_time,
+                'start_date' => $event->event_start_date,
+                'end_date' => $event->event_end_date,
+            ];
+        }
+        wp_send_json_success($data);
+    } else {
+        wp_send_json_error(['message' => 'Событий на эту дату нет']);
+    }
+    wp_die();
+}
+
 
 
 add_theme_support('custom-logo');

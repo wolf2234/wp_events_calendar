@@ -31,7 +31,6 @@ $id = rand(); // not related to searches, so we'll just add an ID for good pract
 			}
 		}
 	?>
-	<p style="color:red;font-size:30px;">CARABAN</p>
 	<form enctype='multipart/form-data' id="event-form-<?php echo $id; ?>" class="<?php em_template_classes('event-editor'); ?> <?php if( $EM_Event->is_recurring() ) echo 'em-event-admin-recurring' ?>"
 	    method="post" action="<?php echo esc_url(add_query_arg(array('success'=>null, 'action'=>null))); ?>" data-view-id="<?php echo $id; ?>">
 		<?php do_action('em_front_event_form_header', $EM_Event); ?>
