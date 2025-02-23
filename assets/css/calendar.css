@@ -1,3 +1,12 @@
+.calendar {
+    position: relative;
+    max-width: 600px;
+    height: 100%;
+    margin: 0px auto;
+    background-color: transparent;
+    padding: 30px 0px 0px;
+}
+
 .calendar,
 .em.em-calendar,
 .em-cal-nav {
@@ -89,8 +98,58 @@
     width: 100%;
     height: 100%;
     margin: 0px;
-    background-color: transparent;
+    background-color: transparent !important;
+    border: none !important;
     color: #fff !important;
     font-weight: 400;
     font-size: 20px;
+}
+
+.em.em-calendar .em-cal-body.event-style-pill .em-cal-event>div {
+    display: none;
+}
+
+
+
+.em.em-calendar .em-cal-body .em-cal-day.em-cal-col-6 .em-cal-day-date.em-cal-day-date a,
+.em.em-calendar .em-cal-body .em-cal-day.em-cal-col-6 .em-cal-day-date.em-cal-day-date span,
+.em.em-calendar .em-cal-body .em-cal-day.em-cal-col-7 .em-cal-day-date.em-cal-day-date a,
+.em.em-calendar .em-cal-body .em-cal-day.em-cal-col-7 .em-cal-day-date.em-cal-day-date span {
+    color: #008FE8 !important;
+}
+
+.em.em-calendar .em-cal-head .em-cal-day.em-cal-col-5,
+.em.em-calendar .em-cal-head .em-cal-day.em-cal-col-6 {
+    color: #008FE8 !important;
+}
+
+.em-calendar.preview-modal.size-large {
+    padding: 50px 0px 250px;
+}
+
+.em-cal-nav .month.input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 0px 10px;
+}
+
+.em-cal-nav .month-nav.input {
+    position: absolute;
+    bottom: 30px;
+}
+
+/* eventful-today em-cal-day em-cal-col-7 - TODAY */
+
+
+.em.em-calendar .em-cal-body:not(.auto-aspect) {
+    grid-auto-rows: 1fr;
+    padding: 0px 0px 150px;
+}
+
+.em.em-calendar section.em-cal-days {
+    grid-template-columns: repeat(7, minmax(15px, 10%));
+    justify-content: center;
+    align-content: center;
+    padding: 0px 0px 10px;
 }
