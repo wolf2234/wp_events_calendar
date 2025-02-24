@@ -5,8 +5,16 @@
 // let days = document.querySelectorAll(".em-cal-day-date");
 let clicked = false;
 document.querySelectorAll(".em-cal-day-date").forEach((day) => {
-    console.log(day.clicked);
     day.addEventListener("click", (e) => {
+        if (document.querySelectorAll(".events__item").length > 0) {
+            document.querySelectorAll(".events__item").forEach((item) => {
+                item.remove();
+            });
+        }
+        if (document.querySelector(".events__count").textContent != "0") {
+            document.querySelector(".events__count").innerHTML = "0";
+        }
+
         let [month, year] = document
             .querySelector(".em-month-picker")
             .value.split(" ");
@@ -116,10 +124,41 @@ function getEvents(year, month, date) {
 
         jqRequest.done(function (response) {
             try {
+                document.querySelector(".events__count").innerHTML =
+                    response.data.length !== undefined
+                        ? response.data.length
+                        : 0;
                 response.data.forEach((event) => {
-                    console.log(
-                        `${event.id} - ${event.name} - ${event.status} - ${event.start_time} - ${event.end_time} - ${event.start_date} - ${event.end_date}`
-                    );
+                    let eventsDetails = document.createElement("a");
+                    eventsDetails.setAttribute("href", `#`);
+                    eventsDetails.classList.add("events__details");
+                    eventsDetails.innerHTML = "Details";
+
+                    let eventsItem = document.createElement("div");
+                    let eventsEvent = document.createElement("div");
+                    let eventsName = document.createElement("div");
+                    let eventsTime = document.createElement("div");
+                    let eventsStatus = document.createElement("div");
+                    eventsItem.classList.add("events__item");
+                    eventsEvent.classList.add("events__event");
+
+                    eventsName.classList.add("events__name");
+                    eventsTime.classList.add("events__time");
+                    eventsStatus.classList.add("events__status");
+
+                    eventsName.innerHTML = `${event.name}`;
+                    eventsTime.innerHTML = `${event.start_time}-${event.end_time}`;
+                    eventsStatus.innerHTML = `${event.status}`;
+
+                    eventsEvent.appendChild(eventsName);
+                    eventsEvent.appendChild(eventsTime);
+                    eventsEvent.appendChild(eventsStatus);
+                    eventsItem.appendChild(eventsEvent);
+                    eventsItem.appendChild(eventsDetails);
+
+                    document
+                        .querySelector(".events__items")
+                        .insertAdjacentHTML("afterBegin", eventsItem.outerHTML);
                 });
             } catch (TypeError) {}
         });
