@@ -6,6 +6,13 @@
 let clicked = false;
 document.querySelectorAll(".em-cal-day-date").forEach((day) => {
     day.addEventListener("click", (e) => {
+        document.querySelectorAll(".em-cal-day-date").forEach((day) => {
+            day.classList.remove("clicked");
+        });
+        let today = document
+            .querySelector(".eventless-today")
+            .querySelector(".em-cal-day-date");
+        today.classList.remove("clicked");
         if (document.querySelectorAll(".events__item").length > 0) {
             document.querySelectorAll(".events__item").forEach((item) => {
                 item.remove();
@@ -14,11 +21,10 @@ document.querySelectorAll(".em-cal-day-date").forEach((day) => {
         if (document.querySelector(".events__count").textContent != "0") {
             document.querySelector(".events__count").innerHTML = "0";
         }
+        day.classList.add("clicked");
 
-        let [month, year] = document
-            .querySelector(".em-month-picker")
-            .value.split(" ");
-        month = monthToNumber(month);
+        let monthPicker = document.querySelector(".em-month-picker").value;
+        let [year, month] = monthToNumber(monthPicker);
 
         let resultDay =
             day.textContent.trim().length < 2
@@ -58,9 +64,15 @@ document.querySelectorAll(".em-cal-day-date").forEach((day) => {
         clicked = true;
     });
     if (!clicked) {
-        let [year, month] = document
-            .querySelector(".em-month-picker")
-            .value.split("-");
+        document.querySelectorAll(".em-cal-day-date").forEach((day) => {
+            day.classList.remove("clicked");
+        });
+        let today = document
+            .querySelector(".eventless-today")
+            .querySelector(".em-cal-day-date");
+        today.classList.add("clicked");
+        let monthPicker = document.querySelector(".em-month-picker").value;
+        let [year, month] = monthToNumber(monthPicker);
         let dayNumber = document
             .querySelector(".eventless-today")
             .textContent.trim();
@@ -69,41 +81,44 @@ document.querySelectorAll(".em-cal-day-date").forEach((day) => {
         let date = new Date(year, month - 1);
         let monthName = date.toLocaleString("en-US", { month: "long" });
         eventDate.innerHTML = `${monthName} ${resultDay}`;
+        console.log(year, month, dayNumber, "Clicked");
         getEvents(year, month, dayNumber);
     }
 });
 
 function monthToNumber(monthName) {
-    const monthsUkr = {
-        січень: "01",
-        лютий: "02",
-        березень: "03",
-        квітень: "04",
-        травень: "05",
-        червень: "06",
-        липень: "07",
-        серпень: "08",
-        вересень: "09",
-        жовтень: "10",
-        листопад: "11",
-        грудень: "12",
-    };
-    const monthsUS = {
-        January: "01",
-        February: "02",
-        March: "03",
-        April: "04",
-        May: "05",
-        June: "06",
-        July: "07",
-        August: "08",
-        September: "09",
-        October: "10",
-        November: "11",
-        December: "12",
-    };
+    let [year, month] = [];
 
-    return monthsUkr[monthName.toLowerCase()] || null;
+    if (monthName.includes("-")) {
+        [year, month] = monthName.split("-");
+    } else {
+        [month, year] = monthName.split(" ");
+    }
+    const months = [
+        { nameUS: "January", nameUkr: "січень", number: "01" },
+        { nameUS: "February", nameUkr: "лютий", number: "02" },
+        { nameUS: "March", nameUkr: "березень", number: "03" },
+        { nameUS: "April", nameUkr: "квітень", number: "04" },
+        { nameUS: "May", nameUkr: "травень", number: "05" },
+        { nameUS: "June", nameUkr: "червень", number: "06" },
+        { nameUS: "July", nameUkr: "липень", number: "07" },
+        { nameUS: "August", nameUkr: "серпень", number: "08" },
+        { nameUS: "September", nameUkr: "вересень", number: "09" },
+        { nameUS: "October", nameUkr: "жовтень", number: "10" },
+        { nameUS: "November", nameUkr: "листопад", number: "11" },
+        { nameUS: "December", nameUkr: "грудень", number: "12" },
+    ];
+
+    months.forEach((monthObj) => {
+        if (monthObj.nameUS.toLowerCase() == month.toLowerCase()) {
+            [year, month] = [year, monthObj.number];
+        } else if (monthObj.nameUkr.toLowerCase() == month.toLowerCase()) {
+            [year, month] = [year, monthObj.number];
+        } else if (monthObj.number.toLowerCase() == month.toLowerCase()) {
+            [year, month] = [year, monthObj.number];
+        }
+    });
+    return [year, month];
 }
 
 function getEvents(year, month, date) {

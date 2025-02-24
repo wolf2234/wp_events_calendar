@@ -104,6 +104,13 @@
     color: #fff !important;
     font-weight: 400;
     font-size: 20px;
+    cursor: pointer;
+}
+
+.clicked {
+    background-color: #000;
+    padding: 5px;
+    border-radius: 8px;
 }
 
 .em.em-calendar .em-cal-body.event-style-pill .em-cal-event>div {
