@@ -26,19 +26,21 @@
         </header>
         <div class="">
             <main class="main">
-                <div class="content">
-                    <div class="calendar">
-                        <?php echo do_shortcode('[events_calendar]'); ?>
-                    </div>
-                    <div class="events">
-                        <div class="events__head">
-                            <h2 class="events__title">Events on <span class="events__date"></span></h2>
-                            <div class="events__count"></div>
+                <div class="container-small">
+                    <div class="content">
+                        <div class="calendar">
+                            <?php echo do_shortcode('[events_calendar]'); ?>
                         </div>
-                        <div class="events__body">
-                            <div class="events__items"></div>
-                            <div class="events__btn">
-                                <a href="#" class="events__link">Assign Event</a>
+                        <div class="events">
+                            <div class="events__head">
+                                <h2 class="events__title">Events on <span class="events__date"></span></h2>
+                                <div class="events__count"></div>
+                            </div>
+                            <div class="events__body">
+                                <div class="events__items"></div>
+                                <div class="events__btn">
+                                    <a href="#" class="events__link">Assign Event</a>
+                                </div>
                             </div>
                         </div>
                     </div>
