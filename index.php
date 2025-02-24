@@ -29,10 +29,15 @@
                 <div class="calendar">
                     <?php echo do_shortcode('[events_calendar]'); ?>
                 </div>
-                <div class="event-form" style="background-color:#fff;">
-                    <?php echo do_shortcode('[event_form]'); ?>
-                </div>
+                <!-- <div class="event-form" style="background-color:#fff;">
+                    <?php // echo do_shortcode('[event_form]'); ?>
+                </div> -->
                 <div class="events">
+                    <div class="events__head">
+                        <h2 class="events__title">Events on <span class="events__date"></span></h2>
+                        <div class="events__count">4</div>
+                    </div>
+                    <div class="events__body"></div>
                 </div>
             </main>
         </div>
