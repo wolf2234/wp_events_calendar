@@ -27,6 +27,20 @@ body {
     padding: 10px 0px;
 }
 
+.title {
+    padding: 50px 0px;
+}
+
+.title__name {
+    width: 100%;
+    background-color: rgba(72, 72, 72, 62%);
+    text-align: center;
+    padding: 15px 0px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: 700;
+}
+
 .menu {
     display: flex;
     column-gap: 50px;

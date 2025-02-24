@@ -26,6 +26,9 @@
         </header>
         <div class="">
             <main class="main">
+                <div class="title">
+                    <h1 class="title__name">Calendar</h1>
+                </div>
                 <div class="container-small">
                     <div class="content">
                         <div class="calendar">
