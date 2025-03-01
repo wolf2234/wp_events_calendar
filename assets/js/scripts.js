@@ -9,10 +9,14 @@ document.querySelectorAll(".em-cal-day-date").forEach((day) => {
         document.querySelectorAll(".em-cal-day-date").forEach((day) => {
             day.classList.remove("clicked");
         });
-        let today = document
-            .querySelector(".eventless-today")
-            .querySelector(".em-cal-day-date");
-        today.classList.remove("clicked");
+
+        let evenToday = document.querySelector(".eventless-today")
+            ? document.querySelector(".eventless-today")
+            : document.querySelector(".eventful-today");
+        let eventDay = evenToday.querySelector(".em-cal-day-date");
+        let today = eventDay.textContent.trim();
+
+        eventDay.classList.remove("clicked");
         if (document.querySelectorAll(".events__item").length > 0) {
             document.querySelectorAll(".events__item").forEach((item) => {
                 item.remove();
@@ -59,7 +63,6 @@ document.querySelectorAll(".em-cal-day-date").forEach((day) => {
 
         let resultYear = fullDate.getFullYear();
         let resultMonth = (fullDate.getMonth() + 1).toString().padStart(2, "0");
-        // let resultDate = `${resultYear}-${resultMonth}-${resultDay}`;
         getEvents(resultYear, resultMonth, resultDay);
         clicked = true;
     });
@@ -67,22 +70,23 @@ document.querySelectorAll(".em-cal-day-date").forEach((day) => {
         document.querySelectorAll(".em-cal-day-date").forEach((day) => {
             day.classList.remove("clicked");
         });
-        let today = document
-            .querySelector(".eventless-today")
-            .querySelector(".em-cal-day-date");
-        today.classList.add("clicked");
+        // let check = document.querySelector(".eventful-today") ? true : false;
+        // console.log(check, "ClickedDOCQ");
+        let evenToday = document.querySelector(".eventless-today")
+            ? document.querySelector(".eventless-today")
+            : document.querySelector(".eventful-today");
+        let eventDay = evenToday.querySelector(".em-cal-day-date");
+        let today = eventDay.textContent.trim();
+        eventDay.classList.add("clicked");
         let monthPicker = document.querySelector(".em-month-picker").value;
         let [year, month] = monthToNumber(monthPicker);
-        let dayNumber = document
-            .querySelector(".eventless-today")
-            .textContent.trim();
-        let resultDay = dayNumber.length < 2 ? `0${dayNumber}` : dayNumber;
+        let resultDay = today.length < 2 ? `0${today}` : today;
         let eventDate = document.querySelector(".events__date");
         let date = new Date(year, month - 1);
         let monthName = date.toLocaleString("en-US", { month: "long" });
         eventDate.innerHTML = `${monthName} ${resultDay}`;
-        console.log(year, month, dayNumber, "Clicked");
-        getEvents(year, month, dayNumber);
+        getEvents(year, month, resultDay);
+        clicked = true;
     }
 });
 

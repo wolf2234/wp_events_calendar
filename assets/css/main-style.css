@@ -209,6 +209,7 @@ body {
     flex-direction: column;
     width: 100%;
     row-gap: 15px;
+    padding: 0px 0px 40px 0px;
 }
 
 .events__item {

@@ -49,7 +49,7 @@
                     </div>
                 </div>
                 <div class="event-form">
-                                    <!-- <div class="event-form" style="background-color:#fff;">
+                <!-- <div class="event-form" style="background-color:#fff;">
                     <?php // echo do_shortcode('[event_form]'); ?>
                 </div> -->
                 </div>

@@ -2,6 +2,7 @@
 add_action('wp_enqueue_scripts', 'event_calendar_styles');
 add_action('wp_enqueue_scripts', 'event_calendar_scripts');
 add_action('after_setup_theme', 'event_calendar_nav_menu');
+add_action('after_switch_theme', 'create_custom_events_table');
 
 
 function event_calendar_nav_menu() {
@@ -26,16 +27,16 @@ function event_calendar_scripts() {
     ));
 }
 
-add_filter('event_manager_locate_template', function ($template, $template_name, $template_path) {
-    $theme_template = get_stylesheet_directory() . '/events-manager/' . $template_name;
+// add_filter('event_manager_locate_template', function ($template, $template_name, $template_path) {
+//     $theme_template = get_stylesheet_directory() . '/events-manager/' . $template_name;
 
-    if (file_exists($theme_template)) {
-        error_log('Шаблон загружен из темы: ' . $theme_template);
-        return $theme_template;
-    }
+//     if (file_exists($theme_template)) {
+//         error_log('Шаблон загружен из темы: ' . $theme_template);
+//         return $theme_template;
+//     }
 
-    return $template;
-}, 20, 3);
+//     return $template;
+// }, 20, 3);
 
 
 add_filter( 'get_all_event_organizer_args', 'wpem_all_event_organizer_args', 10 );
@@ -44,23 +45,6 @@ function wpem_all_event_organizer_args($args) {
     unset($args['author']);
     return $args;
 }
-
-
-function custom_fullcalendar_post_types( $args ) {
-    $args['post_types'][] = 'event_listing';
-    return $args;
-}
-add_filter( 'em_fullcalendar_get_options', 'custom_fullcalendar_post_types' );
-
-
-function custom_fullcalendar_event($event) {
-    $event['color'] = '#ff0000'; // Красный цвет для событий
-    $event['title'] = strtoupper($event['title']); // Заглавные буквы
-    return $event;
-}
-add_filter('wp_fullcalendar_event', 'custom_fullcalendar_event');
-
-
 
 
 add_action('wp_ajax_calendar', 'get_calendar_data');
@@ -72,13 +56,13 @@ function get_calendar_data() {
 
     global $wpdb;
     $date = sanitize_text_field($_POST['eventDate']);
-    $table_name = $wpdb->prefix . 'em_events'; 
+    $table_name = $wpdb->prefix . 'custom_events';
 
-    $query = $wpdb->prepare("
-        SELECT event_id, event_name, event_status, event_start_date, event_end_date, event_start_time, event_end_time
-        FROM $table_name 
-        WHERE %s BETWEEN event_start_date AND event_end_date
+    $query = $wpdb->prepare("SELECT event_id, event_name, event_status, event_date_start, event_date_end, event_time_start, event_time_end
+    FROM $table_name
+    WHERE %s BETWEEN event_date_start AND event_date_end
     ", $date);
+    // $query = $wpdb->prepare("SELECT * FROM $table_name");
 
     $events = $wpdb->get_results($query);
 
@@ -89,19 +73,71 @@ function get_calendar_data() {
                 'id' => $event->event_id,
                 'name' => $event->event_name,
                 'status' => $event->event_status,
-                'start_time' => $event->event_start_time,
-                'end_time' => $event->event_end_time,
-                'start_date' => $event->event_start_date,
-                'end_date' => $event->event_end_date,
+                'start_time' => $event->event_time_start,
+                'end_time' => $event->event_time_end,
+                'start_date' => $event->event_date_start,
+                'end_date' => $event->event_date_end,
             ];
         }
         wp_send_json_success($data);
+        // wp_send_json_success(['message' => 'Событий на эту дату нет', "table_name" => $table_name, "events" => $events, "Length" => count($events)]);
     } else {
-        wp_send_json_error(['message' => 'Событий на эту дату нет']);
+        wp_send_json_error(['message' => 'Событий на эту дату нет', "table_name" => $table_name, "events" => $events, "Length" => count($events)]);
     }
     wp_die();
 }
 
+function add_custom_event() {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'custom_events';
+
+    // Преобразуем массив изображений в JSON
+    $images_json = json_encode($images);
+
+    // Вставляем событие в таблицу
+    $wpdb->insert($table_name, [
+        'event_name' => sanitize_text_field($name),
+        'event_start_date' => $start_date,
+        'event_end_date' => $end_date,
+        'event_location' => sanitize_text_field($location),
+        'event_description' => wp_kses_post($description),
+        'event_time_start' => wp_kses_post($description),
+        'event_time_end' => wp_kses_post($description),
+        'event_images' => $images_json, // Сохраняем JSON
+    ]);
+
+    return $wpdb->insert_id;
+}
+
+
+// add_action('wp_ajax_create_events', 'create_custom_events_table');
+// add_action('wp_ajax_nopriv_create_events', 'create_custom_events_table');
+/* <?php echo do_action("create_events"); ?>*/
+// Запуск функции при активации плагина / темы
+function create_custom_events_table() {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'custom_events'; // Название таблицы
+
+    $charset_collate = $wpdb->get_charset_collate();
+    require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+
+    // SQL-запрос на создание таблицы
+    $sql = "CREATE TABLE $table_name (
+        event_id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+        event_name VARCHAR(255) NOT NULL,
+        event_description TEXT NOT NULL,
+        event_status INT NOT NULL DEFAULT 1,
+        event_date_start DATE NOT NULL,
+        event_date_end DATE NOT NULL,
+        event_time_start TIME NOT NULL,
+        event_time_end TIME NOT NULL,
+        event_images TEXT NULL,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        PRIMARY KEY (event_id)
+    ) $charset_collate;";
+
+    dbDelta($sql);
+}
 
 
 add_theme_support('custom-logo');
