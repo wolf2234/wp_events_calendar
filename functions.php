@@ -116,27 +116,29 @@ function add_custom_event() {
 // Запуск функции при активации плагина / темы
 function create_custom_events_table() {
     global $wpdb;
-    $table_name = $wpdb->prefix . 'custom_events'; // Название таблицы
+    $table_name = $wpdb->prefix . 'custom_events';
 
-    $charset_collate = $wpdb->get_charset_collate();
-    require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+    if ($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
 
-    // SQL-запрос на создание таблицы
-    $sql = "CREATE TABLE $table_name (
-        event_id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-        event_name VARCHAR(255) NOT NULL,
-        event_description TEXT NOT NULL,
-        event_status INT NOT NULL DEFAULT 1,
-        event_date_start DATE NOT NULL,
-        event_date_end DATE NOT NULL,
-        event_time_start TIME NOT NULL,
-        event_time_end TIME NOT NULL,
-        event_images TEXT NULL,
-        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-        PRIMARY KEY (event_id)
-    ) $charset_collate;";
+            $charset_collate = $wpdb->get_charset_collate();
+            require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 
-    dbDelta($sql);
+            $sql = "CREATE TABLE $table_name (
+                event_id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+                event_name VARCHAR(255) NOT NULL,
+                event_description TEXT NOT NULL,
+                event_status INT NOT NULL DEFAULT 1,
+                event_date_start DATE NOT NULL,
+                event_date_end DATE NOT NULL,
+                event_time_start TIME NOT NULL,
+                event_time_end TIME NOT NULL,
+                event_images TEXT NULL,
+                created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                PRIMARY KEY (event_id)
+            ) $charset_collate;";
+            
+            dbDelta($sql);
+        }
 }
 
 
