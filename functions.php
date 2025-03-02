@@ -3,6 +3,7 @@ add_action('wp_enqueue_scripts', 'event_calendar_styles');
 add_action('wp_enqueue_scripts', 'event_calendar_scripts');
 add_action('after_setup_theme', 'event_calendar_nav_menu');
 add_action('after_switch_theme', 'create_custom_events_table');
+add_action('after_switch_theme', 'create_event_images_table');
 
 
 function event_calendar_nav_menu() {
@@ -138,8 +139,33 @@ function create_custom_events_table() {
             ) $charset_collate;";
             
             dbDelta($sql);
-        }
+    }
 }
+
+
+function create_event_images_table() {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'event_images'; // Название таблицы
+    $events_table_name = $wpdb->prefix . 'custom_events'; // Название основной таблицы
+
+    // Проверяем, существует ли таблица
+    if ($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
+
+        $charset_collate = $wpdb->get_charset_collate();
+        require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+
+        $sql = "CREATE TABLE $table_name (
+            image_id BIGINT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            event_id BIGINT(20) UNSIGNED NOT NULL,
+            image_url VARCHAR(255) NOT NULL,
+            is_main BOOLEAN NOT NULL DEFAULT FALSE,
+            FOREIGN KEY (event_id) REFERENCES $events_table_name(event_id) ON DELETE CASCADE
+        ) $charset_collate;";
+
+        dbDelta($sql);
+    }
+}
+
 
 
 add_theme_support('custom-logo');
