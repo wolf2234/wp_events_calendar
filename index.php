@@ -33,11 +33,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="event-form">
-                <!-- <div class="event-form" style="background-color:#fff;">
-                    <?php // echo do_shortcode('[event_form]'); ?>
-                </div> -->
-                </div>
             </main>
         </div>
         <?php include 'includes/footer.php' ?>
