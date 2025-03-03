@@ -1,3 +1,8 @@
+<?php
+/*
+Template Name: Footer Part
+*/
+?>
 <footer class="footer">
     <div class="footer__body">
         <div class="container-large">

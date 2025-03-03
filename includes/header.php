@@ -1,3 +1,8 @@
+<?php
+/*
+Template Name: Header Part
+*/
+?>
 <header class="header">
     <div class="container-large">
         <div class="head">

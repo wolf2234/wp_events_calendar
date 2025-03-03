@@ -16,6 +16,7 @@ function event_calendar_styles() {
     wp_enqueue_style('null-style', get_template_directory_uri() . '/assets/css/null-style.css');
     wp_enqueue_style('main-style', get_template_directory_uri() . '/assets/css/main-style.css');
     wp_enqueue_style('calendar', get_template_directory_uri() . '/assets/css/calendar.css');
+    wp_enqueue_style('add-event', get_template_directory_uri() . '/assets/css/add-event.css');
 }
 
 function event_calendar_scripts() {
