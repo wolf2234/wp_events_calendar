@@ -55,7 +55,6 @@ function createMultiField() {
             10: [field, "afterBegin", multiField],
         };
         appendElements(blocks);
-        count++;
     });
 }
 
@@ -123,26 +122,13 @@ function checkMultiField() {
         document.body
             .querySelectorAll(".multi-field__radiomark")
             .forEach((mark) => {
-                mark.classList.add("active");
-                mark
-                    .closest(".multi-field__radio")
-                    .getElementsByTagName("input")[0].checked = true;
+                addAction(mark);
             });
     }
     document.body.addEventListener("click", function (e) {
         if (e.target.classList.contains("multi-field__radiomark")) {
-            document.body
-                .querySelectorAll(".multi-field__radiomark")
-                .forEach((mark) => {
-                    mark.classList.remove("active");
-                    mark
-                        .closest(".multi-field__radio")
-                        .getElementsByTagName("input")[0].checked = false;
-                });
-            e.target.classList.add("active");
-            e.target
-                .closest(".multi-field__radio")
-                .getElementsByTagName("input")[0].checked = true;
+            removeAction();
+            addAction(e.target);
         }
     });
 }
@@ -150,6 +136,7 @@ function checkMultiField() {
 function listenButtons() {
     document.body.addEventListener("click", function (e) {
         if (e.target.classList.contains("multi-field__plus")) {
+            count++;
             createMultiField();
         }
         if (e.target.classList.contains("multi-field__minus")) {
@@ -158,4 +145,21 @@ function listenButtons() {
             }
         }
     });
+}
+
+function removeAction() {
+    document.body
+        .querySelectorAll(".multi-field__radiomark")
+        .forEach((mark) => {
+            mark.classList.remove("active");
+            mark
+                .closest(".multi-field__radio")
+                .getElementsByTagName("input")[0].checked = false;
+        });
+}
+function addAction(mark) {
+    mark.classList.add("active");
+    mark
+        .closest(".multi-field__radio")
+        .getElementsByTagName("input")[0].checked = true;
 }
