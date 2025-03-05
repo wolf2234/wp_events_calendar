@@ -8,11 +8,10 @@ let count = 0;
 function addMultiField() {
     createMultiField();
     checkMultiField();
-    // listenButtons();
+    listenButtons();
 }
 
 function createMultiField() {
-    count++;
     let fields = document.querySelectorAll("div[data-multi-field]");
     fields.forEach(function (field) {
         let className = "multi-field";
@@ -56,6 +55,7 @@ function createMultiField() {
             10: [field, "afterBegin", multiField],
         };
         appendElements(blocks);
+        count++;
     });
 }
 
@@ -119,86 +119,43 @@ function createButton(className) {
 }
 
 function checkMultiField() {
-    let marks = document.querySelectorAll(".multi-field__radiomark");
-    marks.forEach((mark) => {
-        removeAction(marks);
-        if (marks.length == 1) {
-            addAction(mark);
+    if (document.body.querySelectorAll(".multi-field").length == 1) {
+        document.body
+            .querySelectorAll(".multi-field__radiomark")
+            .forEach((mark) => {
+                mark.classList.add("active");
+                mark
+                    .closest(".multi-field__radio")
+                    .getElementsByTagName("input")[0].checked = true;
+            });
+    }
+    document.body.addEventListener("click", function (e) {
+        if (e.target.classList.contains("multi-field__radiomark")) {
+            document.body
+                .querySelectorAll(".multi-field__radiomark")
+                .forEach((mark) => {
+                    mark.classList.remove("active");
+                    mark
+                        .closest(".multi-field__radio")
+                        .getElementsByTagName("input")[0].checked = false;
+                });
+            e.target.classList.add("active");
+            e.target
+                .closest(".multi-field__radio")
+                .getElementsByTagName("input")[0].checked = true;
         }
-        mark.addEventListener("click", function (e) {
-            removeAction(marks);
-            e.preventDefault();
-            addAction(mark);
-        });
     });
-}
-
-function removeAction(marks) {
-    marks.forEach((mark) => {
-        mark.classList.remove("active");
-        mark
-            .closest(".multi-field__radio")
-            .getElementsByTagName("input")[0].checked = false;
-    });
-}
-function addAction(mark) {
-    mark.classList.add("active");
-    mark
-        .closest(".multi-field__radio")
-        .getElementsByTagName("input")[0].checked = true;
 }
 
 function listenButtons() {
-    // let pluses = document.querySelectorAll(".multi-field__plus");
-    // let minuses = document.querySelectorAll(".multi-field__minus");
-    let c = 0;
-    // document.querySelectorAll(".multi-field__plus").forEach((plus) => {
-    //     plus.addEventListener("click", function (e) {
-    //         count++;
-    //         createMultiField();
-    //         console.log(
-    //             document.querySelectorAll(".multi-field").length,
-    //             "Plus"
-    //         );
-    //         c++;
-    //         console.log(c);
-    //     });
-    // });
-    // document.querySelectorAll(".multi-field__minus").forEach((minus) => {
-    //     minus.addEventListener("click", function (e) {
-    //         if (document.querySelectorAll(".multi-field").length > 1) {
-    //             e.preventDefault();
-    //             minus.closest(".multi-field").remove();
-    //         }
-    //     });
-    // });
-    // document.querySelectorAll(".multi-field").forEach((field) => {
-    //     let mines = field.querySelector(".multi-field__minus");
-    //     mines.addEventListener("click", function (e) {
-    //         if (document.querySelectorAll(".multi-field").length > 1) {
-    //             e.preventDefault();
-    //             field.remove();
-    //         }
-    //     });
-    // });
+    document.body.addEventListener("click", function (e) {
+        if (e.target.classList.contains("multi-field__plus")) {
+            createMultiField();
+        }
+        if (e.target.classList.contains("multi-field__minus")) {
+            if (document.body.querySelectorAll(".multi-field").length > 1) {
+                e.target.closest(".multi-field").remove();
+            }
+        }
+    });
 }
-
-// function plus(field) {
-//     let plus = field.querySelector(".multi-field__plus");
-//     plus.addEventListener("click", function (e) {
-//         e.preventDefault();
-//         count++;
-//         createMultiField();
-//         console.log("Plus");
-//     });
-// }
-// function minus(field) {
-//     let minus = field.querySelector(".multi-field__minus");
-//     minus.addEventListener("click", function (e) {
-//         if (document.querySelectorAll(".multi-field").length > 1) {
-//             e.preventDefault();
-//             field.remove();
-//         }
-//         console.log(field, "Minus");
-//     });
-// }

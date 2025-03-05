@@ -63,3 +63,9 @@
     padding: 15px 50px;
     cursor: pointer;
 }
+
+.event-form__field {
+    display: flex;
+    flex-direction: column;
+    row-gap: 25px;
+}
