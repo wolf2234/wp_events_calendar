@@ -1,4 +1,4 @@
-let count = 0;
+let count = 1;
 /*
 <div class="multi-field">
     <div class="multi-field__file">
@@ -33,7 +33,10 @@ function createMultiField() {
         let className = "multi-field";
         let multiField = createDiv(className);
         let multiFieldFile = createDiv(`${className}__file`);
-        let multiFieldTitle = createSpan(`${className}__title`, "Photo 1");
+        let multiFieldTitle = createSpan(
+            `${className}__title`,
+            `Photo ${count}`
+        );
         let multiFieldRadiomark = createSpan(`${className}__radiomark`);
         let multiFieldRow = createDiv(`${className}__row`);
         let multiFieldButtons = createDiv(`${className}__buttons`);
@@ -72,7 +75,7 @@ function createMultiField() {
             9: [multiFieldFile, "beforeEnd", multiFieldTitle],
             10: [multiFieldFile, "beforeEnd", multiFieldRow],
             11: [multiField, "beforeEnd", multiFieldFile],
-            12: [field, "afterBegin", multiField],
+            12: [field, "beforeEnd", multiField],
         };
         appendElements(blocks);
     });
