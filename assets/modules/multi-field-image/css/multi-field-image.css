@@ -39,14 +39,21 @@
 
 .multi-field__buttons {
     display: flex;
-    align-items: center;
-    align-self: flex-end;
+    align-self: center;
+}
+
+.multi-field__file {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    row-gap: 15px;
 }
 
 .multi-field__img {
-    display: flex;
-    flex-direction: column;
-    row-gap: 15px;
+    display: none;
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
 }
 
 .multi-field__minus {

@@ -7,6 +7,7 @@ let count = 0;
 // }
 function addMultiField() {
     createMultiField();
+    showImage();
     checkMultiField();
     listenButtons();
 }
@@ -16,7 +17,7 @@ function createMultiField() {
     fields.forEach(function (field) {
         let className = "multi-field";
         let multiField = createDiv(className);
-        let multiFieldImg = createDiv(`${className}__img`);
+        let multiFieldFile = createDiv(`${className}__file`);
         let multiFieldTitle = createSpan(`${className}__title`, "Photo 1");
         let multiFieldRadiomark = createSpan(`${className}__radiomark`);
         let multiFieldButtons = createDiv(`${className}__buttons`);
@@ -34,6 +35,7 @@ function createMultiField() {
             "file",
             "file-image"
         );
+        let multiFieldImg = createImg(`${className}__img`, `preview-${count}`);
         let multiFieldRadioInput = createInput(
             `${className}__radioinput`,
             `is-main-checkbox-${count}`,
@@ -42,17 +44,18 @@ function createMultiField() {
         );
 
         const blocks = {
-            0: [multiFieldImg, "beforeEnd", multiFieldTitle],
-            1: [multiFieldImg, "beforeend", multiFieldLabel],
-            2: [multiFieldImg, "beforeend", multiFieldInput],
-            3: [multiFieldRadio, "beforeend", multiFieldRadioInput],
-            4: [multiFieldRadio, "beforeend", multiFieldRadiomark],
-            5: [multiFieldButtons, "beforeend", multiFieldPlus],
-            6: [multiFieldButtons, "beforeend", multiFieldMinus],
-            7: [multiFieldButtons, "beforeend", multiFieldRadio],
-            8: [multiField, "beforeEnd", multiFieldImg],
-            9: [multiField, "beforeEnd", multiFieldButtons],
-            10: [field, "afterBegin", multiField],
+            0: [multiFieldFile, "beforeEnd", multiFieldTitle],
+            1: [multiFieldFile, "beforeend", multiFieldLabel],
+            2: [multiFieldFile, "beforeend", multiFieldInput],
+            3: [multiFieldFile, "beforeend", multiFieldImg],
+            4: [multiFieldRadio, "beforeend", multiFieldRadioInput],
+            5: [multiFieldRadio, "beforeend", multiFieldRadiomark],
+            6: [multiFieldButtons, "beforeend", multiFieldPlus],
+            7: [multiFieldButtons, "beforeend", multiFieldMinus],
+            8: [multiFieldButtons, "beforeend", multiFieldRadio],
+            9: [multiField, "beforeEnd", multiFieldFile],
+            10: [multiField, "beforeEnd", multiFieldButtons],
+            11: [field, "afterBegin", multiField],
         };
         appendElements(blocks);
     });
@@ -91,6 +94,16 @@ function createLabel(className, id = null, value = null) {
         element.innerText = value;
     }
     element.className = className;
+    return element;
+}
+function createImg(className, id = null) {
+    let element = document.createElement("img");
+    if (id) {
+        element.setAttribute("id", id);
+    }
+    element.className = className;
+    element.setAttribute("src", "");
+    element.setAttribute("alt", "Image");
     return element;
 }
 
@@ -169,4 +182,27 @@ function addAction(mark) {
     mark
         .closest(".multi-field__radio")
         .getElementsByTagName("input")[0].checked = true;
+}
+
+function showImage() {
+    document.body.addEventListener("change", function (element) {
+        if (element.target.classList.contains("multi-field__input")) {
+            let file = element.target.files[0];
+            if (file) {
+                let reader = new FileReader();
+                reader.onload = function (e) {
+                    let image = element.target
+                        .closest(".multi-field__file")
+                        .querySelector(".multi-field__img");
+                    let inputFile = element.target
+                        .closest(".multi-field__file")
+                        .querySelector(".multi-field__label");
+                    image.src = e.target.result;
+                    image.style.display = "block";
+                    inputFile.style.display = "none";
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+    });
 }
