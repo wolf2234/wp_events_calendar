@@ -1,3 +1,4 @@
+// document.addEventListener("DOMContentLoaded", function () {
 document
     .querySelector(".event-form__btn")
     .addEventListener("click", function (event) {
@@ -18,3 +19,12 @@ document
         });
     });
 addMultiField();
+let ff = document.querySelectorAll(".multi-field__plus");
+ff.forEach((plus) => {
+    console.log(document.querySelectorAll(".multi-field__plus").length);
+    plus.addEventListener("click", function (e) {
+        createMultiField();
+        console.log(document.querySelectorAll(".multi-field").length, "Plus");
+    });
+});
+// });

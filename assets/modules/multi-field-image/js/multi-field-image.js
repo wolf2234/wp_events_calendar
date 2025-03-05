@@ -1,3 +1,4 @@
+let count = 0;
 // export function addMultiField() {
 //     let multiFields = document.querySelectorAll("div[data-multi-field]");
 //     multiFields.forEach(function (multiField) {
@@ -5,55 +6,57 @@
 //     });
 // }
 function addMultiField() {
-    let multiFields = document.querySelectorAll("div[data-multi-field]");
-    multiFields.forEach(function (multiField) {
-        createMultiField(multiField);
-        checkMultiField();
-    });
+    createMultiField();
+    checkMultiField();
+    // listenButtons();
 }
 
-function createMultiField(field) {
-    let className = "multi-field";
-    let multiField = createDiv(className);
-    let multiFieldImg = createDiv(`${className}__img`);
-    let multiFieldTitle = createSpan(`${className}__title`, "Photo 1");
-    let multiFieldRadiomark = createSpan(`${className}__radiomark`);
-    let multiFieldButtons = createDiv(`${className}__buttons`);
-    let multiFieldPlus = createButton(`${className}__plus`);
-    let multiFieldMinus = createButton(`${className}__minus`);
-    let multiFieldRadio = createDiv(`${className}__radio`);
-    let multiFieldLabel = createLabel(
-        `${className}__label`,
-        `file-image-${0}`,
-        "Add photo"
-    );
-    let multiFieldInput = createInput(
-        `${className}__input`,
-        `file-image-${0}`,
-        "file",
-        "file-image"
-    );
-    let multiFieldRadioInput = createInput(
-        `${className}__radioinput`,
-        `is-main-checkbox-${0}`,
-        "radio",
-        "customOption"
-    );
+function createMultiField() {
+    count++;
+    let fields = document.querySelectorAll("div[data-multi-field]");
+    fields.forEach(function (field) {
+        let className = "multi-field";
+        let multiField = createDiv(className);
+        let multiFieldImg = createDiv(`${className}__img`);
+        let multiFieldTitle = createSpan(`${className}__title`, "Photo 1");
+        let multiFieldRadiomark = createSpan(`${className}__radiomark`);
+        let multiFieldButtons = createDiv(`${className}__buttons`);
+        let multiFieldPlus = createButton(`${className}__plus`);
+        let multiFieldMinus = createButton(`${className}__minus`);
+        let multiFieldRadio = createDiv(`${className}__radio`);
+        let multiFieldLabel = createLabel(
+            `${className}__label`,
+            `file-image-${count}`,
+            "Add photo"
+        );
+        let multiFieldInput = createInput(
+            `${className}__input`,
+            `file-image-${count}`,
+            "file",
+            "file-image"
+        );
+        let multiFieldRadioInput = createInput(
+            `${className}__radioinput`,
+            `is-main-checkbox-${count}`,
+            "radio",
+            "customOption"
+        );
 
-    const blocks = {
-        0: [multiFieldImg, "beforeEnd", multiFieldTitle],
-        1: [multiFieldImg, "beforeend", multiFieldLabel],
-        2: [multiFieldImg, "beforeend", multiFieldInput],
-        3: [multiFieldRadio, "beforeend", multiFieldRadioInput],
-        4: [multiFieldRadio, "beforeend", multiFieldRadiomark],
-        5: [multiFieldButtons, "beforeend", multiFieldPlus],
-        6: [multiFieldButtons, "beforeend", multiFieldMinus],
-        7: [multiFieldButtons, "beforeend", multiFieldRadio],
-        8: [multiField, "beforeEnd", multiFieldImg],
-        9: [multiField, "beforeEnd", multiFieldButtons],
-        10: [field, "afterBegin", multiField],
-    };
-    appendElements(blocks);
+        const blocks = {
+            0: [multiFieldImg, "beforeEnd", multiFieldTitle],
+            1: [multiFieldImg, "beforeend", multiFieldLabel],
+            2: [multiFieldImg, "beforeend", multiFieldInput],
+            3: [multiFieldRadio, "beforeend", multiFieldRadioInput],
+            4: [multiFieldRadio, "beforeend", multiFieldRadiomark],
+            5: [multiFieldButtons, "beforeend", multiFieldPlus],
+            6: [multiFieldButtons, "beforeend", multiFieldMinus],
+            7: [multiFieldButtons, "beforeend", multiFieldRadio],
+            8: [multiField, "beforeEnd", multiFieldImg],
+            9: [multiField, "beforeEnd", multiFieldButtons],
+            10: [field, "afterBegin", multiField],
+        };
+        appendElements(blocks);
+    });
 }
 
 function appendElements(blocks) {
@@ -144,3 +147,58 @@ function addAction(mark) {
         .closest(".multi-field__radio")
         .getElementsByTagName("input")[0].checked = true;
 }
+
+function listenButtons() {
+    // let pluses = document.querySelectorAll(".multi-field__plus");
+    // let minuses = document.querySelectorAll(".multi-field__minus");
+    let c = 0;
+    // document.querySelectorAll(".multi-field__plus").forEach((plus) => {
+    //     plus.addEventListener("click", function (e) {
+    //         count++;
+    //         createMultiField();
+    //         console.log(
+    //             document.querySelectorAll(".multi-field").length,
+    //             "Plus"
+    //         );
+    //         c++;
+    //         console.log(c);
+    //     });
+    // });
+    // document.querySelectorAll(".multi-field__minus").forEach((minus) => {
+    //     minus.addEventListener("click", function (e) {
+    //         if (document.querySelectorAll(".multi-field").length > 1) {
+    //             e.preventDefault();
+    //             minus.closest(".multi-field").remove();
+    //         }
+    //     });
+    // });
+    // document.querySelectorAll(".multi-field").forEach((field) => {
+    //     let mines = field.querySelector(".multi-field__minus");
+    //     mines.addEventListener("click", function (e) {
+    //         if (document.querySelectorAll(".multi-field").length > 1) {
+    //             e.preventDefault();
+    //             field.remove();
+    //         }
+    //     });
+    // });
+}
+
+// function plus(field) {
+//     let plus = field.querySelector(".multi-field__plus");
+//     plus.addEventListener("click", function (e) {
+//         e.preventDefault();
+//         count++;
+//         createMultiField();
+//         console.log("Plus");
+//     });
+// }
+// function minus(field) {
+//     let minus = field.querySelector(".multi-field__minus");
+//     minus.addEventListener("click", function (e) {
+//         if (document.querySelectorAll(".multi-field").length > 1) {
+//             e.preventDefault();
+//             field.remove();
+//         }
+//         console.log(field, "Minus");
+//     });
+// }
