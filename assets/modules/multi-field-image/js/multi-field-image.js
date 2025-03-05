@@ -135,16 +135,23 @@ function checkMultiField() {
 
 function listenButtons() {
     document.body.addEventListener("click", function (e) {
-        if (e.target.classList.contains("multi-field__plus")) {
-            count++;
-            createMultiField();
-        }
-        if (e.target.classList.contains("multi-field__minus")) {
-            if (document.body.querySelectorAll(".multi-field").length > 1) {
-                e.target.closest(".multi-field").remove();
-            }
-        }
+        plus(e.target);
+        minus(e.target);
     });
+}
+
+function plus(button) {
+    if (button.classList.contains("multi-field__plus")) {
+        count++;
+        createMultiField();
+    }
+}
+function minus(button) {
+    if (button.classList.contains("multi-field__minus")) {
+        if (document.body.querySelectorAll(".multi-field").length > 1) {
+            button.closest(".multi-field").remove();
+        }
+    }
 }
 
 function removeAction() {
