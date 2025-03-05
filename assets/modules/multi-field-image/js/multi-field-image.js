@@ -20,6 +20,7 @@ function createMultiField() {
         let multiFieldFile = createDiv(`${className}__file`);
         let multiFieldTitle = createSpan(`${className}__title`, "Photo 1");
         let multiFieldRadiomark = createSpan(`${className}__radiomark`);
+        let multiFieldRow = createDiv(`${className}__row`);
         let multiFieldButtons = createDiv(`${className}__buttons`);
         let multiFieldPlus = createButton(`${className}__plus`);
         let multiFieldMinus = createButton(`${className}__minus`);
@@ -44,18 +45,19 @@ function createMultiField() {
         );
 
         const blocks = {
-            0: [multiFieldFile, "beforeEnd", multiFieldTitle],
-            1: [multiFieldFile, "beforeend", multiFieldLabel],
-            2: [multiFieldFile, "beforeend", multiFieldInput],
-            3: [multiFieldFile, "beforeend", multiFieldImg],
-            4: [multiFieldRadio, "beforeend", multiFieldRadioInput],
-            5: [multiFieldRadio, "beforeend", multiFieldRadiomark],
-            6: [multiFieldButtons, "beforeend", multiFieldPlus],
-            7: [multiFieldButtons, "beforeend", multiFieldMinus],
-            8: [multiFieldButtons, "beforeend", multiFieldRadio],
-            9: [multiField, "beforeEnd", multiFieldFile],
-            10: [multiField, "beforeEnd", multiFieldButtons],
-            11: [field, "afterBegin", multiField],
+            0: [multiFieldRadio, "beforeend", multiFieldRadioInput],
+            1: [multiFieldRadio, "beforeend", multiFieldRadiomark],
+            2: [multiFieldButtons, "beforeend", multiFieldPlus],
+            3: [multiFieldButtons, "beforeend", multiFieldMinus],
+            4: [multiFieldButtons, "beforeend", multiFieldRadio],
+            5: [multiFieldRow, "beforeend", multiFieldLabel],
+            6: [multiFieldRow, "beforeend", multiFieldInput],
+            7: [multiFieldRow, "beforeend", multiFieldImg],
+            8: [multiFieldRow, "beforeend", multiFieldButtons],
+            9: [multiFieldFile, "beforeEnd", multiFieldTitle],
+            10: [multiFieldFile, "beforeEnd", multiFieldRow],
+            11: [multiField, "beforeEnd", multiFieldFile],
+            12: [field, "afterBegin", multiField],
         };
         appendElements(blocks);
     });

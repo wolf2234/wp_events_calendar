@@ -37,15 +37,21 @@
     background-size: cover;
 }
 
+.multi-field__row {
+    display: flex;
+    align-self: center;
+    column-gap: 8px;
+}
+
 .multi-field__buttons {
     display: flex;
     align-self: center;
+    height: 100%;
 }
 
 .multi-field__file {
     display: flex;
     flex-direction: column;
-    align-self: flex-start;
     row-gap: 15px;
 }
 
@@ -79,11 +85,6 @@
     background-color: transparent;
     cursor: pointer;
 }
-
-.event-form__minuse {}
-
-
-.multi-field__radio {}
 
 .multi-field__radiomark {
     cursor: pointer;
