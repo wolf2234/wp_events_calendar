@@ -1,10 +1,25 @@
 let count = 0;
-// export function addMultiField() {
-//     let multiFields = document.querySelectorAll("div[data-multi-field]");
-//     multiFields.forEach(function (multiField) {
-//         createMultiField(multiField);
-//     });
-// }
+/*
+<div class="multi-field">
+    <div class="multi-field__file">
+        <span class="multi-field__title">Photo 1</span>
+        <div class="multi-field__row">
+                <label for="file-image-2" class="multi-field__label">Add photo</label>
+                <input id="file-image-2" name="file-image" type="file" class="multi-field__input" hidden="true">
+                <img id="preview-2" class="multi-field__img" src="" alt="Image">
+                <div class="multi-field__buttons">
+                        <button type="button" class="multi-field__plus"></button>
+                        <button type="button" class="multi-field__minus"></button>
+                        <div class="multi-field__radio">
+                            <input id="is-main-checkbox-2" name="customOption" type="radio" class="multi-field__radioinput" hidden="true">
+                            <span class="multi-field__radiomark active"></span>
+                        </div>
+                </div>
+        </div>
+    </div>
+</div> 
+*/
+
 function addMultiField() {
     createMultiField();
     showImage();
