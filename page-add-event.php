@@ -6,7 +6,7 @@ wp_head();
 ?>
     <div class="wrapper">
         <?php include 'includes/header.php';?>
-        <div class="">
+        <div class="add-event-content">
             <div class="container-large">
                 <form id="id_event_form" class="event-form">
                     <div class="event-form__head">

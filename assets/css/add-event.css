@@ -6,6 +6,10 @@
     border-radius: 10px;
 }
 
+.add-event-content {
+    padding: 50px 0px;
+}
+
 .event-form__head {
     padding: 0px 0px 15px 0px;
 }
