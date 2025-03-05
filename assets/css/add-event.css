@@ -33,16 +33,33 @@
 }
 
 .event-form__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    row-gap: 15px;
     background-color: #000;
     padding: 70px 50px;
 }
 
-.event-form__items {}
+.event-form__items {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 15px;
+}
 
 .event-form__item {}
 
-.event-form__input {}
 
-.event-form__label {
-    color: #fff;
+.event-form__submit {
+    text-align: center;
+}
+
+.event-form__btn {
+    border-radius: 10px;
+    background-color: #fff;
+    color: #000;
+    font-weight: 600;
+    font-size: 24px;
+    padding: 15px 50px;
+    cursor: pointer;
 }
