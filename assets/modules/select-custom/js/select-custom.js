@@ -25,11 +25,6 @@ function createSelect(selectBlock, className) {
     let selectIcon = createDiv(`${className}__icon`);
     let selectValue = createDiv(`${className}__value`, getValue(selectBlock));
     let selectItems = createSelectItems(selectBlock, className);
-    // let element = document.createElement("div");
-    // element.className = `${className}__value`;
-    // element.innerText = getValue(selectBlock);
-    // selectValue = element;
-    // console.log(selectValue);
 
     // Collection div elements in a specific order.
     const blocks = {
@@ -88,8 +83,7 @@ function changeSelectValue(selectOrigin, selectCustom, className) {
         let selectValue = selectCustom.querySelector(`.${className}__value`);
         let selectBlock = removeSelectedOptions(selectOrigin);
         for (let option of selectBlock.options) {
-            if (selectValue.innerText == option.textContent) {
-                console.log(option.textContent);
+            if (selectValue.innerText == option.textContent.trim()) {
                 option.setAttribute("selected", "");
             }
         }
