@@ -31,18 +31,18 @@ function createMultiField() {
     let fields = document.querySelectorAll("div[data-multi-field]");
     fields.forEach(function (field) {
         let className = "multi-field";
-        let multiField = createDiv(className);
-        let multiFieldFile = createDiv(`${className}__file`);
+        let multiField = createDivField(className);
+        let multiFieldFile = createDivField(`${className}__file`);
         let multiFieldTitle = createSpan(
             `${className}__title`,
             `Photo ${count}`
         );
         let multiFieldRadiomark = createSpan(`${className}__radiomark`);
-        let multiFieldRow = createDiv(`${className}__row`);
-        let multiFieldButtons = createDiv(`${className}__buttons`);
+        let multiFieldRow = createDivField(`${className}__row`);
+        let multiFieldButtons = createDivField(`${className}__buttons`);
         let multiFieldPlus = createButton(`${className}__plus`);
         let multiFieldMinus = createButton(`${className}__minus`);
-        let multiFieldRadio = createDiv(`${className}__radio`);
+        let multiFieldRadio = createDivField(`${className}__radio`);
         let multiFieldLabel = createLabel(
             `${className}__label`,
             `file-image-${count}`,
@@ -77,11 +77,11 @@ function createMultiField() {
             11: [multiField, "beforeEnd", multiFieldFile],
             12: [field, "beforeEnd", multiField],
         };
-        appendElements(blocks);
+        appendElementsField(blocks);
     });
 }
 
-function appendElements(blocks) {
+function appendElementsField(blocks) {
     for (let block in blocks) {
         blocks[block][0].insertAdjacentElement(
             blocks[block][1].trim(),
@@ -90,7 +90,7 @@ function appendElements(blocks) {
     }
 }
 
-function createDiv(className) {
+function createDivField(className) {
     let element = document.createElement("div");
     element.className = className;
     return element;

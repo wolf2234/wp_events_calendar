@@ -73,3 +73,28 @@
     flex-direction: column;
     row-gap: 25px;
 }
+
+
+.event-form__select {
+    /* display: flex;
+    flex-direction: column;
+    row-gap: 15px; */
+}
+
+.event-form__label {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+.select-custom__body {
+    background-color: #000;
+    color: #fff;
+    border: 1px solid #fff;
+}
+
+.select-custom__value {
+    color: #fff;
+    font-size: 16px;
+}

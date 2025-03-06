@@ -17,4 +17,5 @@ document
             console.log(file);
         });
     });
+addCustomSelect();
 addMultiField();

@@ -16,8 +16,9 @@ function event_calendar_styles() {
     wp_enqueue_style('null-style', get_template_directory_uri() . '/assets/css/null-style.css');
     wp_enqueue_style('main-style', get_template_directory_uri() . '/assets/css/main-style.css');
     wp_enqueue_style('calendar', get_template_directory_uri() . '/assets/css/calendar.css');
-    wp_enqueue_style('add-event', get_template_directory_uri() . '/assets/css/add-event.css');
+    wp_enqueue_style('select-custom', get_template_directory_uri() . '/assets/modules/select-custom/css/select-custom.css');
     wp_enqueue_style('multi-field', get_template_directory_uri() . '/assets/modules/multi-field-image/css/multi-field-image.css');
+    wp_enqueue_style('add-event', get_template_directory_uri() . '/assets/css/add-event.css');
 }
 
 function event_calendar_scripts() {
@@ -25,6 +26,7 @@ function event_calendar_scripts() {
     wp_register_script( 'jquery', "https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js");
     wp_enqueue_script( 'jquery' );
     wp_enqueue_script( 'scripts', get_template_directory_uri() . '/assets/js/scripts.js', array('jquery'), null, true);
+    wp_enqueue_script('select-custom', get_template_directory_uri() . '/assets/modules/select-custom/js/select-custom.js', array('jquery'), null, true);
     wp_enqueue_script('multi-field', get_template_directory_uri() . '/assets/modules/multi-field-image/js/multi-field-image.js', array('jquery'), null, true);
     // wp_script_add_data('multi-field', 'type', 'module');
     wp_enqueue_script( 'add-event', get_template_directory_uri() . '/assets/js/add-event.js', array('jquery'), null, true);

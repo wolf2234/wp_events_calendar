@@ -40,6 +40,17 @@ wp_head();
                             -->
                             </div>
                             <div class="event-form__item">
+                                <div class="event-form__field">
+                                    <div class="event-form__select">
+                                        <label for="select1" class="event-form__label">Access</label>
+                                        <select name="event-select" id="select1" data-custom-select>
+                                            <option value="0" selected>AAA</option>
+                                            <option value="1">BBB</option>
+                                            <option value="2">CCC</option>
+                                            <option value="3">DDD</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                             <div class="event-form__item">
                             </div>
