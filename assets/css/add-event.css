@@ -51,7 +51,9 @@
     column-gap: 15px;
 }
 
-.event-form__item {}
+.event-form__item {
+    height: 100%;
+}
 
 
 .event-form__submit {
@@ -76,9 +78,10 @@
 
 
 .event-form__select {
-    /* display: flex;
+    display: flex;
     flex-direction: column;
-    row-gap: 15px; */
+    row-gap: 10px;
+    height: 100%;
 }
 
 .event-form__label {

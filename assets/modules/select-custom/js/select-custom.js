@@ -46,7 +46,7 @@ function createSelect(selectBlock, className) {
     selectBlock.style.display = "none";
 
     addActive(selectCustom);
-    putValue(selectBlock, selectCustom, className);
+    putValue(selectCustom, className);
     changeSelectValue(selectBlock, selectCustom, className);
 }
 
@@ -158,7 +158,7 @@ function addActive(select) {
  * @param {object} select
  * @param {string} className
  */
-function putValue(origin, select, className) {
+function putValue(select, className) {
     const items = select
         .querySelector(`.${className}__items`)
         .querySelectorAll(`.${className}__item`);
