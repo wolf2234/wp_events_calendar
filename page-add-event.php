@@ -17,7 +17,7 @@ wp_head();
                     <div class="event-form__body">
                         <div class="event-form__items">
                             <div class="event-form__item">
-                                <div class="event-form__field" data-multi-field></div>
+                                <div class="event-form__images" data-multi-field></div>
                                 <!--
                                 <div class="multi-field">
                                     <div class="multi-field__file">
@@ -41,6 +41,22 @@ wp_head();
                             </div>
                             <div class="event-form__item">
                                 <div class="event-form__field">
+                                    <label for="event-name" class="event-form__label">Name of Event</label>
+                                    <input id="event-name" type="text" value="" name="event-name" class="event-form__name">
+                                </div>
+                                <div class="event-form__field">
+                                    <label for="event-starttime" class="event-form__label">Start time</label>
+                                    <input id="event-starttime" type="time" value="" name="datetime" class="event-form__time">
+                                </div>
+                                <div class="event-form__field">
+                                    <label for="event-endttime" class="event-form__label">End time</label>
+                                    <input id="event-endttime" type="time" value="" name="datetime" class="event-form__time">
+                                </div>
+                                <div class="event-form__field">
+                                    <label for="event-date" class="event-form__label">Date</label>
+                                    <input id="event-date" type="date" value="" name="date" class="event-form__date">
+                                </div>
+                                <div class="event-form__field">
                                     <div class="access">
                                         <label for="select1" class="access__label">Access</label>
                                         <select name="event-select1" id="select1" data-custom-select>
@@ -51,13 +67,19 @@ wp_head();
                                 </div>
                             </div>
                             <div class="event-form__item">
-                                <div class="status">
+                                <div class="event-form__field">
+                                    <label for="event-cost" class="event-form__label">Price</label>
+                                    <input id="event-cost" type="number" value="" name="event-cost" class="event-form__cost">
+                                </div>
+                                <div class="event-form__field">
+                                    <div class="status">
                                         <label for="status1" class="status__label">Status</label>
                                         <select name="event-select2" id="status1" data-custom-select>
                                             <option value="0" selected>Ongoing</option>
                                             <option value="1">Finished</option>
                                         </select>
                                     </div>
+                                </div>
                             </div>
                         </div>
                         <div class="event-form__submit">
