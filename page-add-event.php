@@ -84,6 +84,30 @@ wp_head();
                                         </select>
                                     </div>
                                 </div>
+                                <div class="event-form__field">
+                                    <div class="adress">
+                                        <div class="adress__row">
+                                            <div class="adress__item">
+                                                <label for="event-adress" class="adress__label">Address Line</label>
+                                                <input id="event-adress" type="text" value="" name="event-adress" class="adress__input">
+                                            </div>
+                                            <div class="adress__item">
+                                                <label for="event-adress" class="adress__label">City</label>
+                                                <input id="event-adress" type="text" value="" name="event-adress" class="adress__input">
+                                            </div>
+                                        </div>
+                                        <div class="adress__row">
+                                            <div class="adress__item">
+                                                <label for="event-adress" class="adress__label">Country</label>
+                                                <input id="event-adress" type="text" value="" name="event-adress" class="adress__input">
+                                            </div>
+                                            <div class="adress__item">
+                                                <label for="event-adress" class="adress__label">ZIP Code</label>
+                                                <input id="event-adress" type="text" value="" name="event-adress" class="adress__input">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="event-form__submit">

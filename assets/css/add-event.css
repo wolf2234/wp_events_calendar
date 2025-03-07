@@ -60,15 +60,15 @@
 }
 
 .event-form__item:nth-child(1) {
-    width: 30%;
+    width: 24%;
 }
 
 .event-form__item:nth-child(2) {
-    /* width: 40%; */
+    width: 26%;
 }
 
 .event-form__item:nth-child(3) {
-    /* width: 60%; */
+    width: 30%;
 }
 
 
@@ -95,7 +95,7 @@
 .event-form__field {
     display: flex;
     flex-direction: column;
-    row-gap: 15px;
+    row-gap: 19px;
     height: 100%;
     width: 100%;
 }
@@ -110,7 +110,7 @@
     height: 100%;
 }
 
-
+.adress__label,
 .event-form__label,
 .cost-field__label,
 .access__label,
@@ -222,7 +222,7 @@
 }
 
 .access .select-custom__value::before,
-.access .select-custom__item::before {
+.access .select-custom__item:nth-child(1)::before {
     content: "";
     display: inline-block;
     width: 28px;
@@ -244,7 +244,25 @@
     background-size: cover;
 }
 
+.adress {
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+}
 
+.adress__row {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 30px;
+}
+
+.adress__item {
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+}
+
+.adress__input,
 .event-form__name,
 .cost-field__input input,
 .event-form__time,
