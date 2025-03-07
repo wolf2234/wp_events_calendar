@@ -70,17 +70,22 @@
     cursor: pointer;
 }
 
-.event-form__field {}
+.event-form__field {
+    display: flex;
+    flex-direction: column;
+    row-gap: 25px;
+    height: 100%;
+}
 
 
-.event-form__select {
+.access {
     display: flex;
     flex-direction: column;
     row-gap: 10px;
     height: 100%;
 }
 
-.event-form__label {
+.access__label {
     color: #fff;
     font-size: 18px;
     font-weight: 700;

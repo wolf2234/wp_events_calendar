@@ -41,8 +41,8 @@ wp_head();
                             </div>
                             <div class="event-form__item">
                                 <div class="event-form__field">
-                                    <div class="event-form__select">
-                                        <label for="select1" class="event-form__label">Access</label>
+                                    <div class="access">
+                                        <label for="select1" class="access__label">Access</label>
                                         <select name="event-select" id="select1" data-custom-select>
                                             <option value="0" selected>Public</option>
                                             <option value="1">Private</option>
