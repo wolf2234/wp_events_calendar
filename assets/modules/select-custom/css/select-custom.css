@@ -1,8 +1,6 @@
 .select-custom {
     position: relative;
     max-width: 500px;
-    min-width: 200px;
-    min-height: 18px;
     overflow: hidden;
     transition: 0.3s all ease;
     z-index: 5;

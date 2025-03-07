@@ -70,11 +70,7 @@
     cursor: pointer;
 }
 
-.event-form__field {
-    display: flex;
-    flex-direction: column;
-    row-gap: 25px;
-}
+.event-form__field {}
 
 
 .event-form__select {
@@ -89,15 +85,92 @@
     font-size: 18px;
     font-weight: 700;
     text-transform: capitalize;
+    padding: 0px 0px 0px 6px;
+}
+
+.select-custom {
+    max-width: 238px;
+    width: 238px;
+    min-width: 190px;
+    background-color: transparent;
+    border-radius: 8px;
 }
 
 .select-custom__body {
     background-color: #000;
     color: #fff;
     border: 1px solid #fff;
+    border-radius: 8px;
+    padding: 4px 20px;
 }
 
 .select-custom__value {
-    color: #fff;
-    font-size: 16px;
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.select-custom__icon {
+    margin-top: -3px;
+    /* border: solid white;
+    border-width: 0 2px 2px 0; */
+    width: 25px;
+    height: 25px;
+    background-image: url("../img/select_arrow.png");
+    /* background-position: center; */
+    background-repeat: no-repeat;
+    background-size: cover;
+    transform: rotate(0deg);
+}
+
+.select-custom__items {
+    background-color: #000000;
+    border: 1px solid #ffffff;
+}
+
+.select-custom__item {
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: 700;
+    padding: 4px 20px;
+}
+
+.select-custom.is-active .select-custom__items {
+    background-color: #000000;
+    z-index: 3;
+}
+
+.select-custom.is-active .select-custom__icon {
+    margin-bottom: 0px;
+    transform: rotate(180deg);
+}
+
+.select-custom__value,
+.select-custom__item {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.select-custom__value::before,
+.select-custom__item::before {
+    content: "";
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    background-image: url("../img/people_skin.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.select-custom__item:nth-child(2)::before {
+    content: "";
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    background-image: url("../img/Lock.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
