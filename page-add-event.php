@@ -108,7 +108,23 @@ wp_head();
                                         </div>
                                     </div>
                                 </div>
+                                <div class="event-form__field">
+                                    <div class="authors">
+                                        <label for="event-author" class="authors__label">Speackers</label>
+                                        <textarea name="event-author" id="event-author" class="authors__textarea" rows="7"></textarea>
+                                    </div>
+                                </div>
                             </div>
+                        </div>
+                        <div class="event-form__field">
+                            <div class="description">
+                                <label for="event-description" class="description__label">Description</label>
+                                <textarea name="event-description" id="event-author" class="description__textarea" rows="12"></textarea>
+                            </div>
+                        </div>
+                        <div class="event-form__field">
+                            <label for="event-tags" class="event-form__label">Tags</label>
+                            <input id="event-tags" type="text" value="" name="event-tags" class="event-form__tags">
                         </div>
                         <div class="event-form__submit">
                             <button type="submit" class="event-form__btn">Create Event</button>

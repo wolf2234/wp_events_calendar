@@ -75,6 +75,7 @@
 
 .event-form__submit {
     text-align: center;
+    padding: 100px 0px 0px 0px;
 }
 
 .event-form__btn {
@@ -101,7 +102,8 @@
     width: 100%;
 }
 
-
+.authors,
+.description,
 .access,
 .status,
 .cost-field {
@@ -111,6 +113,12 @@
     height: 100%;
 }
 
+.description {
+    padding: 0px 0px 50px 0px;
+}
+
+.authors__label,
+.description__label,
 .adress__label,
 .event-form__label,
 .cost-field__label,
@@ -263,6 +271,9 @@
     row-gap: 15px;
 }
 
+.event-form__tags,
+.authors__textarea,
+.description__textarea,
 .adress__input,
 .event-form__name,
 .cost-field__input input,
@@ -274,6 +285,15 @@
     padding: 10px 12px 10px 15px;
     border-radius: 8px;
 }
+
+.description__textarea,
+.authors__textarea {
+    padding: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+.description__textarea {}
 
 .cost-field__input input {
     font-size: 16px;
