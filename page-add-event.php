@@ -68,8 +68,12 @@ wp_head();
                             </div>
                             <div class="event-form__item">
                                 <div class="event-form__field">
-                                    <label for="event-cost" class="event-form__label">Price</label>
-                                    <input id="event-cost" type="number" value="" name="event-cost" class="event-form__cost">
+                                    <div class="cost-field">
+                                        <label for="event-cost" class="cost-field__label">Price</label>
+                                        <div class="cost-field__input">
+                                            <input id="event-cost" type="number" value="" name="event-cost" class="">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="event-form__field">
                                     <div class="status">
