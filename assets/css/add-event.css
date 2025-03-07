@@ -57,18 +57,19 @@
     /* align-items: flex-start; */
     row-gap: 25px;
     height: 100%;
+    flex-basis: 28.3%;
 }
 
 .event-form__item:nth-child(1) {
-    width: 24%;
+    /* width: 24%; */
 }
 
 .event-form__item:nth-child(2) {
-    width: 26%;
+    /* width: 26%; */
 }
 
 .event-form__item:nth-child(3) {
-    width: 30%;
+    /* width: 30%; */
 }
 
 
