@@ -43,7 +43,7 @@ wp_head();
                                 <div class="event-form__field">
                                     <div class="access">
                                         <label for="select1" class="access__label">Access</label>
-                                        <select name="event-select" id="select1" data-custom-select>
+                                        <select name="event-select1" id="select1" data-custom-select>
                                             <option value="0" selected>Public</option>
                                             <option value="1">Private</option>
                                         </select>
@@ -51,6 +51,13 @@ wp_head();
                                 </div>
                             </div>
                             <div class="event-form__item">
+                                <div class="status">
+                                        <label for="status1" class="status__label">Status</label>
+                                        <select name="event-select2" id="status1" data-custom-select>
+                                            <option value="0" selected>Ongoing</option>
+                                            <option value="1">Finished</option>
+                                        </select>
+                                    </div>
                             </div>
                         </div>
                         <div class="event-form__submit">
