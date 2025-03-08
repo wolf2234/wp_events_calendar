@@ -30,7 +30,10 @@ function event_calendar_scripts() {
     wp_enqueue_script('multi-field', get_template_directory_uri() . '/assets/modules/multi-field-image/js/multi-field-image.js', array('jquery'), null, true);
     // wp_script_add_data('multi-field', 'type', 'module');
     wp_enqueue_script( 'add-event', get_template_directory_uri() . '/assets/js/add-event.js', array('jquery'), null, true);
-    wp_localize_script('scripts', 'ajax_object', array(
+    wp_localize_script('scripts', 'ajax_object_scripts', array(
+        'ajaxurl' => admin_url('admin-ajax.php'),
+    ));
+    wp_localize_script('add-event', 'ajax_object_addevent', array(
         'ajaxurl' => admin_url('admin-ajax.php'),
     ));
 }

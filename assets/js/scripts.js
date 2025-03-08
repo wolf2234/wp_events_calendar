@@ -137,7 +137,7 @@ function getEvents(year, month, date) {
             month: "long",
         });
 
-        let jqRequest = jQuery.post(ajax_object.ajaxurl, data);
+        let jqRequest = jQuery.post(ajax_object_scripts.ajaxurl, data);
         let eventsDate = document.querySelector(".events__date");
         eventsDate.innerHTML = `${nameOfMonth} ${date}`;
 
