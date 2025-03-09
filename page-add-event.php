@@ -25,25 +25,20 @@ wp_head();
                                     <input id="event-name" type="text" value="" name="event-name" class="event-form__name">
                                 </div>
                                 <div class="event-form__field">
-                                    <label for="event-starttime" class="event-form__label">Start time</label>
-                                    <input id="event-starttime" type="time" value="" name="datetime" class="event-form__time">
+                                    <label for="event-startime" class="event-form__label">Start time</label>
+                                    <input id="event-startime" type="time" value="" name="datetime" class="event-form__time">
                                 </div>
                                 <div class="event-form__field">
-                                    <label for="event-endttime" class="event-form__label">End time</label>
-                                    <input id="event-endttime" type="time" value="" name="datetime" class="event-form__time">
+                                    <label for="event-endtime" class="event-form__label">End time</label>
+                                    <input id="event-endtime" type="time" value="" name="datetime" class="event-form__time">
                                 </div>
                                 <div class="event-form__field">
-                                    <label for="event-date" class="event-form__label">Date</label>
-                                    <input id="event-date" type="date" value="" name="date" class="event-form__date">
+                                    <label for="event-startdate" class="event-form__label">Start Date</label>
+                                    <input id="event-startdate" type="date" value="" name="date" class="event-form__date">
                                 </div>
                                 <div class="event-form__field">
-                                    <div class="access">
-                                        <label for="select1" class="access__label">Access</label>
-                                        <select name="event-select1" id="select1" data-custom-select>
-                                            <option value="0" selected>Public</option>
-                                            <option value="1">Private</option>
-                                        </select>
-                                    </div>
+                                    <label for="event-enddate" class="event-form__label">End Date</label>
+                                    <input id="event-enddate" type="date" value="" name="date" class="event-form__date">
                                 </div>
                             </div>
                             <div class="event-form__item">
@@ -53,6 +48,15 @@ wp_head();
                                         <div class="cost-field__input">
                                             <input id="event-cost" type="number" value="" name="event-cost" class="">
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="event-form__field">
+                                    <div class="access">
+                                        <label for="select1" class="access__label">Access</label>
+                                        <select name="event-select1" id="select1" data-custom-select>
+                                            <option value="0" selected>Public</option>
+                                            <option value="1">Private</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="event-form__field">

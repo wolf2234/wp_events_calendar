@@ -73,7 +73,6 @@ function get_calendar_data() {
     FROM $table_name
     WHERE %s BETWEEN event_date_start AND event_date_end
     ", $date);
-    // $query = $wpdb->prepare("SELECT * FROM $table_name");
 
     $events = $wpdb->get_results($query);
 
@@ -91,38 +90,99 @@ function get_calendar_data() {
             ];
         }
         wp_send_json_success($data);
-        // wp_send_json_success(['message' => 'Событий на эту дату нет', "table_name" => $table_name, "events" => $events, "Length" => count($events)]);
     } else {
         wp_send_json_error(['message' => 'Событий на эту дату нет', "table_name" => $table_name, "events" => $events, "Length" => count($events)]);
     }
     wp_die();
 }
 
+
+add_action('wp_ajax_add_custom_event', 'add_custom_event');
+add_action('wp_ajax_nopriv_add_custom_event', 'add_custom_event');
 function add_custom_event() {
     global $wpdb;
-    $table_name = $wpdb->prefix . 'custom_events';
+    // Получаем данные из AJAX-запроса
+    $event_name = sanitize_text_field($_POST['event_name']);
+    $event_description = sanitize_textarea_field($_POST['event_description']);
+    $event_status = sanitize_text_field($_POST['event_status']);
+    $event_date_start = sanitize_text_field($_POST['event_date_start']);
+    $event_date_end = sanitize_text_field($_POST['event_date_end']);
+    $event_time_start = sanitize_text_field($_POST['event_time_start']);
+    $event_time_end = sanitize_text_field($_POST['event_time_end']);
+    $event_price = floatval($_POST['event_price']);
+    $event_access = sanitize_text_field($_POST['event_access']);
+    $event_address = sanitize_text_field($_POST['event_address']);
+    $event_city = sanitize_text_field($_POST['event_city']);
+    $event_country = sanitize_text_field($_POST['event_country']);
+    $event_zip_code = sanitize_text_field($_POST['event_zip_code']);
+    $event_speakers = sanitize_textarea_field($_POST['event_speakers']);
+    $event_tags = sanitize_text_field($_POST['event_tags']);
 
-    // Преобразуем массив изображений в JSON
-    $images_json = json_encode($images);
-
-    // Вставляем событие в таблицу
-    $wpdb->insert($table_name, [
-        'event_name' => sanitize_text_field($name),
-        'event_start_date' => $start_date,
-        'event_end_date' => $end_date,
-        'event_location' => sanitize_text_field($location),
-        'event_description' => wp_kses_post($description),
-        'event_time_start' => wp_kses_post($description),
-        'event_time_end' => wp_kses_post($description),
-        'event_images' => $images_json, // Сохраняем JSON
+    // Вставляем событие в таблицу wp_custom_events
+    $table_events = $wpdb->prefix . 'custom_events';
+    $wpdb->insert($table_events, [
+        'event_name' => $event_name,
+        'event_description' => $event_description,
+        'event_status' => $event_status,
+        'event_date_start' => $event_date_start,
+        'event_date_end' => $event_date_end,
+        'event_time_start' => $event_time_start,
+        'event_time_end' => $event_time_end,
+        'event_price' => $event_price,
+        'event_access' => $event_access,
+        'event_address' => $event_address,
+        'event_city' => $event_city,
+        'event_country' => $event_country,
+        'event_zip_code' => $event_zip_code,
+        'event_speackers' => $event_speakers,
+        'event_tags' => $event_tags,
     ]);
 
-    return $wpdb->insert_id;
+    // Получаем ID созданного события
+    $event_id = $wpdb->insert_id;
+
+    if (!$event_id) {
+        wp_send_json_error(['message' => 'Ошибка при добавлении события']);
+        wp_die();
+    }
+
+    // Загружаем изображения и добавляем их в таблицу wp_event_images
+    if (!empty($_FILES['event_images'])) {
+        $table_images = $wpdb->prefix . 'event_images';
+
+        foreach ($_FILES['event_images']['name'] as $index => $filename) {
+            if ($_FILES['event_images']['error'][$index] == 0) {
+                $file = [
+                    'name' => $_FILES['event_images']['name'][$index],
+                    'type' => $_FILES['event_images']['type'][$index],
+                    'tmp_name' => $_FILES['event_images']['tmp_name'][$index],
+                    'error' => $_FILES['event_images']['error'][$index],
+                    'size' => $_FILES['event_images']['size'][$index]
+                ];
+
+                // Загружаем файл в WordPress
+                $upload = wp_handle_upload($file, ['test_form' => false]);
+
+                if (!isset($upload['error'])) {
+                    $image_url = $upload['url'];
+                    $is_main = isset($_POST['is_main'][$index]) && $_POST['is_main'][$index] == 'true' ? 1 : 0;
+
+                    // Вставляем запись в таблицу wp_event_images
+                    $wpdb->insert($table_images, [
+                        'event_id' => $event_id,
+                        'image_url' => $image_url,
+                        'is_main' => $is_main,
+                    ]);
+                }
+            }
+        }
+    }
+
+    wp_send_json_success(['message' => 'Событие и изображения успешно добавлены']);
+    wp_die();
 }
 
 
-// add_action('wp_ajax_create_events', 'create_custom_events_table');
-// add_action('wp_ajax_nopriv_create_events', 'create_custom_events_table');
 /* <?php echo do_action("create_events"); ?>*/
 // Запуск функции при активации плагина / темы
 function create_custom_events_table() {
@@ -134,18 +194,24 @@ function create_custom_events_table() {
             $charset_collate = $wpdb->get_charset_collate();
             require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 
-            $sql = "CREATE TABLE $table_name (
-                event_id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+            $sql = "CREATE TABLE IF NOT EXISTS $table_name (
+                event_id BIGINT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
                 event_name VARCHAR(255) NOT NULL,
                 event_description TEXT NOT NULL,
-                event_status INT NOT NULL DEFAULT 1,
+                event_status VARCHAR(50) NOT NULL,
                 event_date_start DATE NOT NULL,
                 event_date_end DATE NOT NULL,
                 event_time_start TIME NOT NULL,
                 event_time_end TIME NOT NULL,
-                event_images TEXT NULL,
-                created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-                PRIMARY KEY (event_id)
+                event_price DECIMAL(10,2) NOT NULL,
+                event_access VARCHAR(50) NOT NULL,
+                event_address VARCHAR(255) NOT NULL,
+                event_city VARCHAR(100) NOT NULL,
+                event_country VARCHAR(100) NOT NULL,
+                event_zip_code VARCHAR(20) NOT NULL,
+                event_speackers TEXT NOT NULL,
+                event_tags VARCHAR(255) NOT NULL,
+                created_at DATETIME DEFAULT CURRENT_TIMESTAMP
             ) $charset_collate;";
             
             dbDelta($sql);
