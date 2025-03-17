@@ -115,10 +115,10 @@ function get_events_info() {
 
     if (!empty($events)) {
         $data = [];
+        $list_images = [];
         foreach ($events as $event) {
-            $list_images = [];
             $query_images = $wpdb->prepare("SELECT image_id, event_id, image_url, is_main FROM $event_images WHERE event_id = %s", $event->event_id);
-            $images = $wpdb->get_results($query_iamges);
+            $images = $wpdb->get_results($query_images);
             foreach ($images as $image) {
                 $list_images[] = [
                     'id' => $image->image_id,
@@ -136,8 +136,10 @@ function get_events_info() {
                 'end_date' => $event->event_date_end,
                 'images' => $list_images,
             ];
+            $list_images = [];
         }
         wp_send_json_success($data);
+        // wp_send_json_success(['images' => $images]);
     } else {
         wp_send_json_error(['message' => 'Событий на эту дату нет', "table_name" => $table_name, "events" => $events, "Length" => count($events)]);
     }

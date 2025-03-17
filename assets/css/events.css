@@ -1,4 +1,13 @@
 .events {
-    background-color: #fff;
-    color: red;
+    padding: 0px;
+    height: 100%;
 }
+
+
+.events__body {}
+
+.title {}
+
+.title__name {}
+
+.container-large {}
