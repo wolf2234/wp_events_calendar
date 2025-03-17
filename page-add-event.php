@@ -117,7 +117,6 @@ wp_head();
                 </form>
             </div>
         </div>
-        
         <?php include 'includes/footer.php' ?>
     </div>
 <?php wp_footer(); ?>

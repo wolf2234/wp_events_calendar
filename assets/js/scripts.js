@@ -4,6 +4,7 @@
 // console.log(monthName);
 // let days = document.querySelectorAll(".em-cal-day-date");
 let clicked = false;
+
 document.querySelectorAll(".em-cal-day-date").forEach((day) => {
     day.addEventListener("click", (e) => {
         document.querySelectorAll(".em-cal-day-date").forEach((day) => {
@@ -17,13 +18,13 @@ document.querySelectorAll(".em-cal-day-date").forEach((day) => {
         let today = eventDay.textContent.trim();
 
         eventDay.classList.remove("clicked");
-        if (document.querySelectorAll(".events__item").length > 0) {
-            document.querySelectorAll(".events__item").forEach((item) => {
+        if (document.querySelectorAll(".calendar__item").length > 0) {
+            document.querySelectorAll(".calendar__item").forEach((item) => {
                 item.remove();
             });
         }
-        if (document.querySelector(".events__count").textContent != "0") {
-            document.querySelector(".events__count").innerHTML = "0";
+        if (document.querySelector(".calendar__count").textContent != "0") {
+            document.querySelector(".calendar__count").innerHTML = "0";
         }
         day.classList.add("clicked");
 
@@ -81,7 +82,7 @@ document.querySelectorAll(".em-cal-day-date").forEach((day) => {
         let monthPicker = document.querySelector(".em-month-picker").value;
         let [year, month] = monthToNumber(monthPicker);
         let resultDay = today.length < 2 ? `0${today}` : today;
-        let eventDate = document.querySelector(".events__date");
+        let eventDate = document.querySelector(".calendar__date");
         let date = new Date(year, month - 1);
         let monthName = date.toLocaleString("en-US", { month: "long" });
         eventDate.innerHTML = `${monthName} ${resultDay}`;
@@ -138,19 +139,19 @@ function getEvents(year, month, date) {
         });
 
         let jqRequest = jQuery.post(ajax_object_scripts.ajaxurl, data);
-        let eventsDate = document.querySelector(".events__date");
+        let eventsDate = document.querySelector(".calendar__date");
         eventsDate.innerHTML = `${nameOfMonth} ${date}`;
 
         jqRequest.done(function (response) {
             try {
-                document.querySelector(".events__count").innerHTML =
+                document.querySelector(".calendar__count").innerHTML =
                     response.data.length !== undefined
                         ? response.data.length
                         : 0;
                 response.data.forEach((event) => {
                     let eventsDetails = document.createElement("a");
                     eventsDetails.setAttribute("href", `#`);
-                    eventsDetails.classList.add("events__details");
+                    eventsDetails.classList.add("calendar__details");
                     eventsDetails.innerHTML = "Details";
 
                     let eventsItem = document.createElement("div");
@@ -158,12 +159,12 @@ function getEvents(year, month, date) {
                     let eventsName = document.createElement("div");
                     let eventsTime = document.createElement("div");
                     let eventsStatus = document.createElement("div");
-                    eventsItem.classList.add("events__item");
-                    eventsEvent.classList.add("events__event");
+                    eventsItem.classList.add("calendar__item");
+                    eventsEvent.classList.add("calendar__event");
 
-                    eventsName.classList.add("events__name");
-                    eventsTime.classList.add("events__time");
-                    eventsStatus.classList.add("events__status");
+                    eventsName.classList.add("calendar__name");
+                    eventsTime.classList.add("calendar__time");
+                    eventsStatus.classList.add("calendar__status");
 
                     eventsName.innerHTML = `${event.name}`;
                     eventsTime.innerHTML = `${event.start_time}-${event.end_time}`;
@@ -176,7 +177,7 @@ function getEvents(year, month, date) {
                     eventsItem.appendChild(eventsDetails);
 
                     document
-                        .querySelector(".events__items")
+                        .querySelector(".calendar__items")
                         .insertAdjacentHTML("afterBegin", eventsItem.outerHTML);
                 });
             } catch (TypeError) {}

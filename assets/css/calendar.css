@@ -1,4 +1,4 @@
-.calendar {
+.calendar__timedates {
     position: relative;
     max-width: 600px;
     width: 100%;
@@ -8,7 +8,7 @@
     padding: 30px 0px 0px;
 }
 
-.calendar,
+.calendar__timedates,
 .em.em-calendar,
 .em-cal-nav {
     background-color: #2C2C2C;
