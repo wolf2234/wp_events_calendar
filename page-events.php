@@ -4,13 +4,13 @@ Template Name: Events
 */
 wp_head();
 ?>
-<div class="">
+<div class="wrapper">
     <?php include 'includes/header.php';?>
-    <div>
+    <div class="event-info">
         <div class="title">
             <h1 class="title__name">Events</h1>
         </div>
-        <div class="events">
+        <div class="container-large events">
             <div class="events__body">
                 <div class="events__items">
                     
