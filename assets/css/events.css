@@ -1,13 +1,160 @@
 .events {
-    padding: 0px;
     height: 100%;
+    padding: 30px 50px;
 }
 
 
-.events__body {}
+.events__body {
+    height: 100%;
+}
 
 .title {}
 
 .title__name {}
 
 .container-large {}
+
+.events__items {
+    display: flex;
+    align-items: flex-start;
+    column-gap: 50px;
+    height: 100%;
+    width: 100%;
+}
+
+.events__item {
+    flex-basis: 33.333%;
+    background-color: #2C2C2C;
+    /* width: 100%;
+    height: 100%; */
+    border-radius: 10px;
+    row-gap: 30px;
+}
+
+.events__link {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    padding: 20px;
+}
+
+.events__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.events__card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 20px;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+}
+
+.events__img {
+    width: 100%;
+    max-height: 320px;
+    height: 100%;
+}
+
+.events__date,
+.events__city {
+    display: flex;
+    align-items: center;
+}
+
+.events__date {
+    column-gap: 10px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.events__title {
+    color: #fff;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.events__city {
+    column-gap: 5px;
+    color: #7F57F1;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.events__date::before,
+.events__city::before {
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.events__date::before {
+    width: 35px;
+    height: 30px;
+    background-image: url("../img/Calendar.png");
+}
+
+.events__city::before {
+    width: 30px;
+    height: 25px;
+    background-image: url("../img/Location.png");
+}
+
+.events__description {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.events__owner {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.events__owner-icon {}
+
+.events__owner-name {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.events__btn {
+    display: inline-block;
+    position: relative;
+    color: #7F57F1;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 10px 45px 10px 14px;
+    border: 1px solid #7F57F1;
+    background-color: transparent;
+    border-radius: 5px;
+}
+
+.events__btn::after {
+    display: inline-block;
+    content: "";
+    position: absolute;
+    right: 15px;
+    top: 33%;
+    background-image: url("../img/btn_right_arrow.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 22px;
+    height: 14px;
+}
+
+.events__btn:hover::after {
+    right: 10px;
+}

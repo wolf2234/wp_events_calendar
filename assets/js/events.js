@@ -1,5 +1,6 @@
 let className = "events";
-let iconLink = "";
+let iconLink =
+    "https://event-calendarmvp.local/wp-content/uploads/2025/03/Male_User.png";
 let textBtn = "Read more";
 jQuery(document).ready(function ($) {
     let data = {
@@ -10,6 +11,7 @@ jQuery(document).ready(function ($) {
         try {
             response.data.forEach((event) => {
                 let imageUrl = getMainImg(event.images);
+                console.log(imageUrl);
                 let datetimeInfo = getFullEventTimeDate(event);
                 let eventsItem = document.createElement("div");
                 let eventLink = document.createElement("a");
@@ -18,13 +20,15 @@ jQuery(document).ready(function ($) {
                 let eventsDate = document.createElement("div");
                 let eventsTitle = document.createElement("h3");
                 let eventsCity = document.createElement("div");
+                let eventsRow = document.createElement("div");
                 let eventsDescription = document.createElement("div");
                 let eventsOwner = document.createElement("div");
                 let eventsOwnerIcon = document.createElement("img");
                 let eventsOwnerName = document.createElement("sup");
-                let eventsBtn = document.createElement("div");
+                let eventsBtn = document.createElement("a");
 
                 eventsItem.classList.add(`${className}__item`);
+                eventsRow.classList.add(`${className}__row`);
                 eventLink.classList.add(`${className}__link`);
                 eventsCard.classList.add(`${className}__card`);
                 eventsImg.classList.add(`${className}__img`);
@@ -40,6 +44,7 @@ jQuery(document).ready(function ($) {
                 eventsImg.setAttribute("src", imageUrl);
                 eventsImg.setAttribute("alt", "Event image");
                 eventLink.setAttribute("href", `#`);
+                eventsBtn.setAttribute("href", `#`);
                 eventsOwnerIcon.setAttribute("src", iconLink);
                 eventsOwnerIcon.setAttribute("alt", "Owner icon");
 
@@ -49,6 +54,22 @@ jQuery(document).ready(function ($) {
                 eventsDescription.textContent = event.description;
                 eventsOwnerName.textContent = "Author name";
                 eventsBtn.textContent = textBtn;
+
+                eventsOwner.appendChild(eventsOwnerIcon);
+                eventsOwner.appendChild(eventsOwnerName);
+                eventsCard.appendChild(eventsImg);
+                eventsCard.appendChild(eventsDate);
+                eventsCard.appendChild(eventsTitle);
+                eventsCard.appendChild(eventsCity);
+                eventsCard.appendChild(eventsDescription);
+                eventsRow.appendChild(eventsOwner);
+                eventsRow.appendChild(eventsBtn);
+                eventsCard.appendChild(eventsRow);
+                eventLink.appendChild(eventsCard);
+                eventsItem.appendChild(eventLink);
+                document.body
+                    .querySelector(`.${className}__items`)
+                    .appendChild(eventsItem);
             });
         } catch (TypeError) {}
     });
@@ -56,11 +77,13 @@ jQuery(document).ready(function ($) {
 });
 
 function getMainImg(imgs) {
+    let url = "";
     imgs.forEach((img) => {
         if (img.is_main == "1") {
-            return img.url;
+            url = img.url;
         }
     });
+    return url;
 }
 
 function getFullEventTimeDate(event) {
