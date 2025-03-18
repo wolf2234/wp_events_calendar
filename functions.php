@@ -109,7 +109,7 @@ function get_events_info() {
     $custom_events = $wpdb->prefix . 'custom_events';
     $event_images = $wpdb->prefix . 'event_images';
 
-    $query_events = $wpdb->prepare("SELECT event_id, event_name, event_status, event_date_start, event_date_end, event_time_start, event_time_end FROM $custom_events");
+    $query_events = $wpdb->prepare("SELECT event_id, event_name, event_status, event_date_start, event_date_end, event_time_start, event_time_end, event_city, event_description FROM $custom_events");
 
     $events = $wpdb->get_results($query_events);
 
@@ -134,6 +134,8 @@ function get_events_info() {
                 'end_time' => $event->event_time_end,
                 'start_date' => $event->event_date_start,
                 'end_date' => $event->event_date_end,
+                'city' => $event->event_city,
+                'description' => $event->event_description,
                 'images' => $list_images,
             ];
             $list_images = [];
