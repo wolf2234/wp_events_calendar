@@ -2,6 +2,7 @@ let className = "events";
 let iconLink =
     "https://event-calendarmvp.local/wp-content/uploads/2025/03/Male_User.png";
 let textBtn = "Read more";
+
 jQuery(document).ready(function ($) {
     let data = {
         action: "events_info",
@@ -43,7 +44,11 @@ jQuery(document).ready(function ($) {
 
                 eventsImg.setAttribute("src", imageUrl);
                 eventsImg.setAttribute("alt", "Event image");
-                eventLink.setAttribute("href", `#`);
+                eventLink.setAttribute(
+                    "href",
+                    `https://event-calendarmvp.local/?page_id=161&event_id=${event.id}`
+                );
+                eventLink.setAttribute("data-id", `${event.id}`);
                 eventsBtn.setAttribute("href", `#`);
                 eventsOwnerIcon.setAttribute("src", iconLink);
                 eventsOwnerIcon.setAttribute("alt", "Owner icon");

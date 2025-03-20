@@ -32,6 +32,9 @@ function event_calendar_scripts() {
     // wp_script_add_data('multi-field', 'type', 'module');
     wp_enqueue_script( 'add-event', get_template_directory_uri() . '/assets/js/add-event.js', array('jquery'), null, true);
     wp_enqueue_script( 'events', get_template_directory_uri() . '/assets/js/events.js', array('jquery'), null, true);
+    wp_enqueue_script( 'event', get_template_directory_uri() . '/assets/js/event.js', array('jquery'), null, true);
+
+
     wp_localize_script('scripts', 'ajax_object_scripts', array(
         'ajaxurl' => admin_url('admin-ajax.php'),
     ));
@@ -39,6 +42,9 @@ function event_calendar_scripts() {
         'ajaxurl' => admin_url('admin-ajax.php'),
     ));
     wp_localize_script('events', 'ajax_object_events', array(
+        'ajaxurl' => admin_url('admin-ajax.php'),
+    ));
+    wp_localize_script('event', 'ajax_object_event', array(
         'ajaxurl' => admin_url('admin-ajax.php'),
     ));
 }
