@@ -20,6 +20,7 @@ function event_calendar_styles() {
     wp_enqueue_style('multi-field', get_template_directory_uri() . '/assets/modules/multi-field-image/css/multi-field-image.css');
     wp_enqueue_style('add-event', get_template_directory_uri() . '/assets/css/add-event.css');
     wp_enqueue_style('events', get_template_directory_uri() . '/assets/css/events.css');
+    wp_enqueue_style('event-details', get_template_directory_uri() . '/assets/css/event-details.css');
 }
 
 function event_calendar_scripts() {

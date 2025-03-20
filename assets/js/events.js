@@ -12,7 +12,6 @@ jQuery(document).ready(function ($) {
         try {
             response.data.forEach((event) => {
                 let imageUrl = getMainImg(event.images);
-                console.log(imageUrl);
                 let datetimeInfo = getFullEventTimeDate(event);
                 let eventsItem = document.createElement("div");
                 let eventLink = document.createElement("a");

@@ -10,9 +10,8 @@ if (isset($_GET['event_id'])) {
 ?>
 <div class="wrapper">
     <?php include 'includes/header.php';?>
-    <div class="">
+    <div class="event" data-event-id="<?php echo $event_id;?>">
         <div class="" style="color:#fff;font-size:24px;">
-            <?php echo $event_id;?>
         </div>
     </div>
     <?php include 'includes/footer.php' ?>
